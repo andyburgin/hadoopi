@@ -33,4 +33,6 @@ template "/etc/hostname" do
         group 'root'
 end
 
-# execute "hostname #{fqdn}" do
+execute "set hostname" do
+	command 'hostname #{node_hostname}'
+end
