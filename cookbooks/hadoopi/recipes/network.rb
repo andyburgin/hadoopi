@@ -38,3 +38,6 @@ template "/etc/hosts" do
         group 'root'
 end
 
+package "nscd" do
+	action :install
+end
