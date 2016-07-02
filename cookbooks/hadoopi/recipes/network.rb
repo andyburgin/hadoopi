@@ -1,6 +1,7 @@
 wirepass = ENV["WIREPASS"]
 node_ip_address = node["node"]["ip_address"]
 node_hostname = node["node"]["hostname"]
+hosts = node["hosts"]
 
 template "/etc/wpa_supplicant/wpa_supplicant.conf" do
 	source "wpa_supplicant.conf.erb"
@@ -22,17 +23,18 @@ template "/etc/dhcpcd.conf" do
         group 'netdev'
 end
 
+execute "set hostname" do
+	command "hostnamectl set-hostname #{node_hostname}"
+end
 
-template "/etc/hostname" do
-        source "hostname.erb"
+template "/etc/hosts" do
+        source "hosts.erb"
         variables(
-                :hostname => node_hostname
+                :hostname => node_hostname,
+		:hosts => hosts
         )
         mode 0644
         user 'root'
         group 'root'
 end
 
-execute "set hostname" do
-	command 'hostname #{node_hostname}'
-end
