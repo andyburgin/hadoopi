@@ -41,4 +41,31 @@ template "/etc/bash.bashrc" do
         group 'root'
 end
 
+template "/opt/hadoop/etc/hadoop/core-site.xml" do
+        source "core-site.xml.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+template "/opt/hadoop/etc/hadoop/hdfs-site.xml" do
+        source "hdfs-site.xml.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+template "/opt/hadoop/etc/hadoop/yarn-site.xml" do
+        source "yarn-site.xml.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
+        source "mapred-site.xml.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
 
