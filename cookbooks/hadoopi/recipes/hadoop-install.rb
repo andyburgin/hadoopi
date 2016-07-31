@@ -80,4 +80,9 @@ directory "/hdfs/tmp" do
         recursive true
 end
 
-
+# format name node, allow return code of 1 incase already formatted
+execute "format namenode" do
+        command "/opt/hadoop/bin/hadoop namenode -format -nonInteractive"
+        user "root"
+        returns [0,1]
+end
