@@ -25,3 +25,18 @@ execute "change hadoop file permissions" do
         user "root"
 end
 
+template "/opt/hadoop/etc/hadoop/hadoop-env.sh" do
+        source "hadoop-env.sh.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+template "/etc/bash.bashrc" do
+        source "bash.bashrc.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
+
+
