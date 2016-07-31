@@ -69,3 +69,12 @@ template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
         group 'hadoop'
 end
 
+# create hdfs file system
+directory "/hdfs/tmp" do
+        owner "hduser"
+        group "hadoop"
+        mode  "0750"
+        recursive true
+end
+
+
