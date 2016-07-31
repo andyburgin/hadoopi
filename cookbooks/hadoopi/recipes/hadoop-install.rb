@@ -1,3 +1,4 @@
+# install hadoop  packages
 package "oracle-java8-jdk"
 package "libsnappy-java"
 package "libssl-dev"
@@ -27,6 +28,7 @@ execute "change hadoop file permissions" do
         user "root"
 end
 
+# update environment vars
 template "/opt/hadoop/etc/hadoop/hadoop-env.sh" do
         source "hadoop-env.sh.erb"
         mode 0644
@@ -41,6 +43,7 @@ template "/etc/bash.bashrc" do
         group 'root'
 end
 
+# create hadoop config files
 template "/opt/hadoop/etc/hadoop/core-site.xml" do
         source "core-site.xml.erb"
         mode 0644
