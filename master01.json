@@ -3,7 +3,8 @@
 		"recipe[hadoopi::network]",
 		"recipe[hadoopi::user]",
 		"recipe[hadoopi::hadoop-install]",
-		"recipe[hadoopi::hadoop-hdfs]"
+		"recipe[hadoopi::hadoop-hdfs]",
+		"recipe[hadoopi::hadoop-hue]"
 	],
 
 	"node": {
