@@ -19,29 +19,29 @@ end
 
 # create default user in hdfs
 execute "start hdfs for config" do
-	command "start-dfs.sh"
+	command "/opt/hadoop/sbin/start-dfs.sh"
 	user "hduser"
 end
 
 execute "create user home" do
-        command "hadoop fs -mkdir /user"
+        command "/opt/hadoop/bin/hadoop fs -mkdir /user"
         user "hduser"
 	returns [0,1]
 end
 
 execute "create hduser home" do
-        command "hadoop fs -mkdir /user/hduser"
+        command "/opt/hadoop/bin/hadoop fs -mkdir /user/hduser"
         user "hduser"
 	returns [0,1]
 end
 
 execute "start hdfs for config" do
-        command "hadoop fs -chown hduser:hduser /user/hduser"
+        command "/opt/hadoop/bin/hadoop fs -chown hduser:hduser /user/hduser"
         user "hduser"
 end
 
 execute "stop hdfs for config" do
-        command "stop-dfs.sh"
+        command "/opt/hadoop/sbin/stop-dfs.sh"
         user "hduser"
 end
 
