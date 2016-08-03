@@ -1,6 +1,6 @@
 
 remote_file "/opt/hue-3.10.0.armf.tar.gz" do
-    source "http://192.168.2.30:8000/hue-3.10.0.armf.tar.gz"
+    source "http://192.168.0.9:8000/hue-3.10.0.armf.tar.gz"
     action :create_if_missing
 end
 
