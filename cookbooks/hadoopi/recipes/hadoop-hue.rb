@@ -10,9 +10,8 @@ execute "unpack hue" do
         user "root"
 end
 
-directory "/opt/hue" do
-        owner "hue"
-        group "hue"
-        mode  "0755"
+execute "own hue" do
+        command "chown hue.hue -R /opt/hue"
+        user "root"
 end
 
