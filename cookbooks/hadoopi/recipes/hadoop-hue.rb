@@ -10,8 +10,15 @@ execute "unpack hue" do
         user "root"
 end
 
-execute "own hue" do
+execute "Chown hue" do
         command "chown hue.hue -R /opt/hue"
         user "root"
+end
+
+template "/opt/hue/desktop/conf/hue.ini" do
+        source "hue.ini.erb"
+        mode 0644
+        user 'hue'
+        group 'hue'
 end
 
