@@ -5,7 +5,8 @@
 		"recipe[hadoopi::hadoop-install]",
 		"recipe[hadoopi::hadoop-hdfs]",
 		"recipe[hadoopi::hadoop-hue]",
-		"recipe[hadoopi::hadoop-hive]"
+		"recipe[hadoopi::hadoop-hive]",
+		"recipe[hadoopi::hadoop-pig]"
 	],
 
 	"node": {
