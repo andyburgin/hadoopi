@@ -35,9 +35,21 @@ execute "create hduser home" do
 	returns [0,1]
 end
 
-execute "start hdfs for config" do
+execute "Chown hduser home" do
         command "/opt/hadoop/bin/hadoop fs -chown hduser:hduser /user/hduser"
         user "hduser"
+end
+
+execute "create Hive Warehouse folder" do
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /user/hive/warehouse"
+        user "hduser"
+        returns [0,1]
+end
+
+execute "Make Hive warehouse folder accessible to all" do
+        command "/opt/hadoop/bin/hadoop fs -chmod a+w /user/hive/warehouse"
+        user "hduser"
+        returns [0,1]
 end
 
 execute "stop hdfs for config" do
