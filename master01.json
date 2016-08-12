@@ -6,7 +6,8 @@
 		"recipe[hadoopi::hadoop-hdfs]",
 		"recipe[hadoopi::hadoop-hue]",
 		"recipe[hadoopi::hadoop-hive]",
-		"recipe[hadoopi::hadoop-pig]"
+		"recipe[hadoopi::hadoop-pig]",
+                "recipe[hadoopi::hadoop-oozie]"
 	],
 
 	"node": {
