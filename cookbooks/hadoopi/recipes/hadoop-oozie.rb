@@ -23,7 +23,7 @@ execute "Chown oozie" do
 end
 
 execute "Chown oozie-4.1.0" do
-        command "chown -R hduser:hadoop /opt/oozie-4.1.0"
+        command "chown -R oozie.oozie /opt/oozie-4.1.0"
         user "root"
 end
 
