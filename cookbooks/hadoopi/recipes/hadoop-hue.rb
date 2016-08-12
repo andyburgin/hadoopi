@@ -23,5 +23,8 @@ template "/opt/hue/desktop/conf/hue.ini" do
         mode 0644
         user 'hue'
         group 'hue'
+        variables( 
+             :hue_secretkey => node['hue']['secretkey']
+        )
 end
 
