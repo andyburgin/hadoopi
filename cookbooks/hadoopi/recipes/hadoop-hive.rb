@@ -1,5 +1,3 @@
-user "hue"
-
 remote_file "/opt/apache-hive-1.2.1-bin.tar.gz" do
     source "http://www.mirrorservice.org/sites/ftp.apache.org/hive/stable/apache-hive-1.2.1-bin.tar.gz"
     action :create_if_missing
@@ -24,8 +22,4 @@ execute "change hive file permissions" do
         command "chown -R hduser:hadoop /opt/apache-hive-1.2.1-bin"
         user "root"
 end
-
-
-
-
 
