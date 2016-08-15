@@ -72,3 +72,30 @@ template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
         group 'hadoop'
 end
 
+
+template "/opt/hadoop/etc/hadoop/masters" do
+        source "masters.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+template "/opt/hadoop/etc/hadoop/slaves" do
+        source "slaves.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+# create hdfs file system
+directory "/hdfs" do
+        mode  "0777"
+end
+
+directory "/hdfs/tmp" do
+        owner "hduser"
+        group "hadoop"
+        mode  "0750"
+        recursive true
+end
+
