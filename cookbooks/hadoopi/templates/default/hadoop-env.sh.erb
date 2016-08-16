@@ -58,7 +58,7 @@ export HADOOP_NFS3_OPTS="$HADOOP_NFS3_OPTS"
 export HADOOP_PORTMAP_OPTS="-Xmx512m $HADOOP_PORTMAP_OPTS"
 
 # The following applies to multiple commands (fs, dfs, fsck, distcp etc)
-export HADOOP_CLIENT_OPTS="-Xmx512m $HADOOP_CLIENT_OPTS"
+export HADOOP_CLIENT_OPTS="-Xmx<%= @maxmem %>m $HADOOP_CLIENT_OPTS"
 #HADOOP_JAVA_PLATFORM_OPTS="-XX:-UsePerfData $HADOOP_JAVA_PLATFORM_OPTS"
 
 # On secure datanodes, user to run the datanode as after dropping privileges.
@@ -100,6 +100,6 @@ export HADOOP_IDENT_STRING=$USER
 export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_INSTALL/lib/native -Djava.net.preferIPv4Stack=true"
 
-export HADOOP_OPTS="$HADOOP_OPTS -Xmx<%= @maxmem %>"
+export HADOOP_OPTS="$HADOOP_OPTS -Xmx<%= @maxmem %>m"
 export HADOOP_HEAPSIZE=<%= @maxmem %>
 export HADOOP_NAMENODE_INIT_HEAPSIZE="<%= @maxmem %>"
