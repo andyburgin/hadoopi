@@ -55,12 +55,14 @@ end
 execute "create oozie db" do
         command "cd /opt/oozie && bin/ooziedb.sh create -sqlfile oozie.sql -run"
         user "oozie"
+        returns [0,1]
 end 
 
 # create sharelib
 execute "start hdfs for config" do
         command "/opt/hadoop/sbin/start-dfs.sh"
         user "hduser"
+        returns [0,1]
 end
 
 execute "create oozie home" do
@@ -72,6 +74,7 @@ end
 execute "Chown oozie home" do
         command "/opt/hadoop/bin/hadoop fs -chown oozie:supergroup /user/oozie"
         user "hduser"
+        returns [0,1]
 end
 
 execute "create Hive Warehouse folder" do

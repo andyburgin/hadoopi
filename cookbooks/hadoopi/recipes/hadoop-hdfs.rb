@@ -27,6 +27,7 @@ end
 execute "Chown hduser home" do
         command "/opt/hadoop/bin/hadoop fs -chown hduser:hduser /user/hduser"
         user "hduser"
+        returns [0,1]
 end
 
 execute "create Hive Warehouse folder" do
