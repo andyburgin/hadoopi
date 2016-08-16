@@ -35,6 +35,16 @@ template "/opt/oozie/conf/oozie-site.xml" do
         group 'oozie'
 end
 
+template "/opt/oozie/conf/oozie-env.sh" do
+        source "oozie-env.sh.erb"
+        mode 0644
+        user 'oozie'
+        group 'oozie'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
+end
+
 # create war file
 execute "prepare oozie war file" do
         command "cd /opt/oozie && bin/oozie-setup.sh prepare-war"

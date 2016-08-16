@@ -100,4 +100,6 @@ export HADOOP_IDENT_STRING=$USER
 export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_INSTALL/lib/native -Djava.net.preferIPv4Stack=true"
 
-
+export HADOOP_OPTS="$HADOOP_OPTS -Xmx<%= @maxmem %>"
+export HADOOP_HEAPSIZE=<%= @maxmem %>
+export HADOOP_NAMENODE_INIT_HEAPSIZE="<%= @maxmem %>"

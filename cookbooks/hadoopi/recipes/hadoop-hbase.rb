@@ -23,3 +23,12 @@ execute "change hbase file permissions" do
         user "root"
 end
 
+template "/opt/hbase/conf/hbase-env.sh" do
+        source "hbase-env.sh.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
+end

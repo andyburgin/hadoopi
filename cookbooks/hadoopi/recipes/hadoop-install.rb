@@ -34,6 +34,29 @@ template "/opt/hadoop/etc/hadoop/hadoop-env.sh" do
         mode 0644
         user 'hduser'
         group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
+end
+
+template "/opt/hadoop/etc/hadoop/mapred-env.sh" do
+        source "mapred-env.sh.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
+end
+
+template "/opt/hadoop/etc/hadoop/yarn-env.sh" do
+        source "yarn-env.sh.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
 end
 
 template "/etc/bash.bashrc" do
