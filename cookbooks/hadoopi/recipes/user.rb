@@ -25,13 +25,15 @@ end
 #	command "if [ ! -f /home/hduser/.ssh/id_rsa ]; then  ssh-keygen -t rsa -f /home/hduser/.ssh/id_rsa -q -P \"\"; fi"
 #end
 
-file "/home/hduser/.ssh/id_rsa" do
+template "/home/hduser/.ssh/id_rsa" do
+        source "id_rsa.erb"
         owner "hduser"
         group "hadoop"
         mode  "0600"
 end
 
-file "/home/hduser/.ssh/id_rsa.pub" do
+template "/home/hduser/.ssh/id_rsa.pub" do
+        source "id_rsa.pub.erb"
         owner "hduser"
         group "hadoop"
         mode  "0644"
