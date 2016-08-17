@@ -16,7 +16,7 @@ end
 directory "/home/hduser/.ssh" do
 	owner "hduser"
 	group "hadoop"
-	mode  "0755"
+	mode  "0700"
 end
 
 #execute "generate ssh keys" do
