@@ -96,14 +96,14 @@ template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
 end
 
 
-template "/opt/hadoop/etc/hadoop/masters.tbc" do
+template "/opt/hadoop/etc/hadoop/masters" do
         source "masters.erb"
         mode 0644
         user 'hduser'
         group 'hadoop'
 end
 
-template "/opt/hadoop/etc/hadoop/slaves.tbc" do
+template "/opt/hadoop/etc/hadoop/slaves" do
         source "slaves.erb"
         mode 0644
         user 'hduser'
