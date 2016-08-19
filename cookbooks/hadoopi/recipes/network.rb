@@ -38,6 +38,13 @@ template "/etc/hosts" do
         group 'root'
 end
 
+template "/etc/ssh/ssh_config" do
+        source "ssh_config.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
+
 execute "restart networking" do
         command "service networking restart"
 end
