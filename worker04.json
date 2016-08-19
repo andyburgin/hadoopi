@@ -6,8 +6,8 @@
 	],
 
 	"node": {
-		"hostname": "worker01",
-		"ip_address": "192.168.0.11"
+		"hostname": "worker04",
+		"ip_address": "192.168.0.14"
 	},
 
 	"hosts": {
