@@ -22,7 +22,7 @@ echo "Start job history server"
 su hduser - -c "/opt/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver"
 
 echo "Start hue"
-/opt/hue/build/env/bin/supervisor -d
+su hue - -c "/opt/hue/build/env/bin/supervisor -d"
 
 echo "Start oozie"
 su oozie - -c "cd /opt/oozie && bin/oozied.sh start"
