@@ -77,7 +77,7 @@ execute "Chown oozie home" do
         returns [0,1]
 end
 
-execute "create Hive Warehouse folder" do
+execute "create oozie shared lib on hdfs" do
         command "cd /opt/oozie && bin/oozie-setup.sh sharelib create -fs hdfs://master01:54310"
         user "oozie"
         returns [0,1]
