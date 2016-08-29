@@ -29,7 +29,7 @@
   http_port=8888
 
   # Time zone name
-  time_zone=America/Los_Angeles
+  time_zone=Europe/London
 
   # Enable or disable Django debug mode.
   django_debug_mode=false
@@ -732,13 +732,13 @@
       ## security_enabled=false
 
       # URL of the ResourceManager API
-      ## resourcemanager_api_url=http://localhost:8088
+      resourcemanager_api_url=http://master01:8088
 
       # URL of the ProxyServer API
       ## proxy_api_url=http://localhost:8088
 
       # URL of the HistoryServer API
-      ## history_server_api_url=http://localhost:19888
+      history_server_api_url=http://master01:19888
 
       # URL of the Spark History Server
       ## spark_history_server_url=http://localhost:18088
@@ -808,7 +808,7 @@
   ## hive_server_port=10000
 
   # Hive configuration directory, where hive-site.xml is located
-  ## hive_conf_dir=/etc/hive/conf
+  hive_conf_dir=/opt/hive/conf
 
   # Timeout in seconds for thrift calls to Hive service
   ## server_conn_timeout=120
