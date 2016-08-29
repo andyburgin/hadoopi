@@ -28,3 +28,28 @@ template "/opt/hue/desktop/conf/hue.ini" do
         )
 end
 
+# install mysql for hue data
+package "mysql-server"
+package "libmysqlclient-dev"
+package "libmysql-java"
+
+execute "Create mysql db" do
+        command "mysql -u root -e <<EOSQL\nCREATE DATABASE hue;\nEOSQL"
+        user "root"
+end
+
+execute "Grant hue user access to mysql db" do
+        command "mysql -u root -e <<EOSQL\nCREATE USER hue IDENTIFIED BY 'huepassword';\nGRANT ALL PRIVILEGES on *.* to 'hue'@'localhost' WITH GRANT OPTION;\nGRANT ALL on hue.* to 'hue.@'localhost' IDENTIFIED BY huepassword;\nFLUSH PRIVILEGES;\nEOSQL"
+        user "root"
+end
+
+execute "create db structure" do
+	command "cd /opt/hue && /opt/hue/build/env/bin/hue syncdb --noinput"
+	user "hue"
+end
+
+execute "sync db structure" do
+        command "cd /opt/hue && /opt/hue/build/env/bin/hue migrate"
+        user "hue"
+end
+
