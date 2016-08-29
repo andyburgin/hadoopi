@@ -34,12 +34,19 @@ package "libmysqlclient-dev"
 package "libmysql-java"
 
 execute "Create mysql db" do
-        command "mysql -u root -e <<EOSQL\nCREATE DATABASE hue;\nEOSQL"
+        command "mysql -u root -e \"CREATE DATABASE hue;\""
         user "root"
+        returns [0,1]
+end
+
+execute "Create mysql hue user" do
+        command "mysql -u root -e \"CREATE USER hue IDENTIFIED BY 'huepassword';\""
+        user "root"
+	returns [0,1]
 end
 
 execute "Grant hue user access to mysql db" do
-        command "mysql -u root -e <<EOSQL\nCREATE USER hue IDENTIFIED BY 'huepassword';\nGRANT ALL PRIVILEGES on *.* to 'hue'@'localhost' WITH GRANT OPTION;\nGRANT ALL on hue.* to 'hue.@'localhost' IDENTIFIED BY huepassword;\nFLUSH PRIVILEGES;\nEOSQL"
+        command "mysql -u root -e \"GRANT ALL PRIVILEGES on *.* to 'hue'@'localhost' WITH GRANT OPTION; GRANT ALL on hue.* to 'hue'@'localhost' IDENTIFIED BY 'huepassword'; FLUSH PRIVILEGES;\""
         user "root"
 end
 
