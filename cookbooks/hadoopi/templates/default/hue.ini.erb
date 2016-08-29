@@ -691,15 +691,15 @@
 
     [[[default]]]
       # Enter the filesystem uri
-      fs_defaultfs=hdfs://localhost:8020
+      fs_defaultfs=hdfs://master01:54310
 
       # NameNode logical name.
-      ## logical_name=
+      logical_name=hdfs://master01:54310
 
       # Use WebHdfs/HttpFs as the communication mechanism.
       # Domain should be the NameNode or HttpFs host.
       # Default port is 14000 for HttpFs.
-      ## webhdfs_url=http://localhost:50070/webhdfs/v1
+      webhdfs_url=http://master01:50070/webhdfs/v1
 
       # Change this if your HDFS cluster is Kerberos-secured
       ## security_enabled=false
@@ -717,10 +717,10 @@
 
     [[[default]]]
       # Enter the host on which you are running the ResourceManager
-      ## resourcemanager_host=localhost
+      resourcemanager_host=master01
 
       # The port where the ResourceManager IPC listens on
-      ## resourcemanager_port=8032
+      resourcemanager_port=8050
 
       # Whether to submit jobs to this cluster
       submit_to=True
