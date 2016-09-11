@@ -57,7 +57,7 @@ execute "change spark file permissions" do
         user "root"
 end
 
-template "/opt/spark/conf/spark-env.sh do
+template "/opt/spark/conf/spark-env.sh" do
         source "spark-env.sh.erb"
         mode 0644
         user 'hduser'
