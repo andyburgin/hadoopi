@@ -1,0 +1,22 @@
+{
+        "run_list": [
+		"recipe[hadoopi::network]",
+		"recipe[hadoopi::user]",
+		"recipe[hadoopi::hadoop-install]",
+                "recipe[hadoopi::hadoop-hbase]",
+                "recipe[hadoopi::hadoop-spark]"
+	],
+
+	"node": {
+		"hostname": "master02",
+		"ip_address": "192.168.0.12"
+	},
+
+	"hosts": {
+                "master01": "192.168.0.11",
+                "master02": "192.168.0.12",
+                "worker01": "192.168.0.21",
+                "worker02": "192.168.0.22",
+                "worker03": "192.168.0.23"
+	}
+}
