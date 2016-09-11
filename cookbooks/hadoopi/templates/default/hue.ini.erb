@@ -747,7 +747,7 @@
       history_server_api_url=http://master01:19888
 
       # URL of the Spark History Server
-      ## spark_history_server_url=http://localhost:18088
+      spark_history_server_url=http://master02:18088
 
       # In secure mode (HTTPS), if SSL certificates from YARN Rest APIs
       # have to be verified against certificate authority
@@ -920,7 +920,7 @@
 
 [spark]
   # Host address of the Livy Server.
-  ## livy_server_host=localhost
+  livy_server_host=master02
 
   # Port of the Livy Server.
   ## livy_server_port=8998
@@ -1023,7 +1023,7 @@
   # Comma-separated list of HBase Thrift servers for clusters in the format of '(name|host:port)'.
   # Use full hostname with security.
   # If using Kerberos we assume GSSAPI SASL, not PLAIN.
-  ## hbase_clusters=(Cluster|localhost:9090)
+  hbase_clusters=(Cluster|master02:9090)
 
   # HBase configuration directory, where hbase-site.xml is located.
   ## hbase_conf_dir=/etc/hbase/conf

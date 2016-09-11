@@ -7,21 +7,19 @@
 		"recipe[hadoopi::hadoop-hue]",
 		"recipe[hadoopi::hadoop-hive]",
 		"recipe[hadoopi::hadoop-pig]",
-                "recipe[hadoopi::hadoop-oozie]",
-                "recipe[hadoopi::hadoop-hbase]",
-                "recipe[hadoopi::hadoop-spark]"
+                "recipe[hadoopi::hadoop-oozie]"
 	],
 
 	"node": {
 		"hostname": "master01",
-		"ip_address": "192.168.0.10"
+		"ip_address": "192.168.0.11"
 	},
 
 	"hosts": {
-		"master01": "192.168.0.10",
-		"worker01": "192.168.0.11",
-                "worker02": "192.168.0.12",
-                "worker03": "192.168.0.13",
-                "worker04": "192.168.0.14"
+		"master01": "192.168.0.11",
+		"master02": "192.168.0.12",
+		"worker01": "192.168.0.21",
+                "worker02": "192.168.0.22",
+                "worker03": "192.168.0.23"
 	}
 }
