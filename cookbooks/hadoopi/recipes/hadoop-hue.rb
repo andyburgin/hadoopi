@@ -13,8 +13,18 @@ execute "unpack hue" do
         user "root"
 end
 
+execute "create hue symlink" do
+        command "if [ ! -d /opt/hue ]; then ln -s /opt/hue-#{node['hue']['version']} /opt/hue; fi"
+        user "root"
+end
+
 execute "Chown hue" do
         command "chown hue.hue -R /opt/hue"
+        user "root"
+end
+
+execute "Chown hue" do
+        command "chown hue.hue -R /opt/hue-#{node['hue']['version']}"
         user "root"
 end
 
