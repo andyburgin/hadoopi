@@ -1,16 +1,16 @@
 
-remote_file "/opt/zookeeper-3.4.8.tar.gz" do
-    source "http://www.mirrorservice.org/sites/ftp.apache.org/zookeeper/stable/zookeeper-3.4.8.tar.gz"
+remote_file "/opt/zookeeper-#{node['zookeeper]['version']}.tar.gz" do
+    source "http://www.mirrorservice.org/sites/ftp.apache.org/zookeeper/stable/zookeeper-#{node['zookeeper']['version']}.tar.gz"
     action :create_if_missing
 end
 
 execute "unpack zookeeper" do
-        command "tar -zxvf /opt/zookeeper-3.4.8.tar.gz  -C /opt/"
+        command "tar -zxvf /opt/zookeeper-#{node['zookeeper']['version'].tar.gz  -C /opt/"
         user "root"
 end
 
 execute "create zookeeper symlink" do
-        command "if [ ! -d /opt/zookeeper ]; then ln -s /opt/zookeeper-3.4.8 /opt/zookeeper; fi"
+        command "if [ ! -d /opt/zookeeper ]; then ln -s /opt/zookeeper-#{node['zookeeper']['version'] /opt/zookeeper; fi"
         user "root"
 end
 
@@ -20,7 +20,7 @@ execute "Chown zookeeper" do
 end
 
 execute "Chown zookeeper binaries" do
-        command "chown -R hduser.hadoop /opt/zookeeper-3.4.8"
+        command "chown -R hduser.hadoop /opt/zookeeper-#{node['zookeeper']['version']"
         user "root"
 end
 

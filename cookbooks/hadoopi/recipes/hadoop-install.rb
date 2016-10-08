@@ -4,18 +4,18 @@ package "libsnappy-java"
 package "libssl-dev"
 package "vim"
 
-remote_file "/opt/hadoop-2.7.2.armf.tar.gz" do
-    source "http://192.168.0.9:8000/hadoop-2.7.2.armf.tar.gz"
+remote_file "/opt/hadoop-#{node['hadoop']['version']}.armf.tar.gz" do
+    source "http://192.168.0.9:8000/hadoop-#{node['hadoop']['version']}.armf.tar.gz"
     action :create_if_missing
 end
 
 execute "unpack hadoop" do
-	command "tar -zxvf /opt/hadoop-2.7.2.armf.tar.gz -C /opt/"
+	command "tar -zxvf /opt/hadoop-#{node['hadoop']['version']}.armf.tar.gz -C /opt/"
 	user "root"
 end
 
 execute "create hadoop symlink" do
-	command "if [ ! -d /opt/hadoop ]; then ln -s /opt/hadoop-2.7.2 /opt/hadoop; fi"
+	command "if [ ! -d /opt/hadoop ]; then ln -s /opt/hadoop-#{node['hadoop']['version']} /opt/hadoop; fi"
 	user "root"
 end
 
@@ -25,7 +25,7 @@ execute "change hadoop file permissions" do
 end	
 
 execute "change hadoop file permissions" do
-        command "chown -R hduser:hadoop /opt/hadoop-2.7.2"
+        command "chown -R hduser:hadoop /opt/hadoop-#{node['hadoop']['version']}"
         user "root"
 end
 

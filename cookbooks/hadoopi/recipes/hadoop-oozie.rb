@@ -2,18 +2,18 @@ user "oozie"
 
 package "zip"
 
-remote_file "/opt/oozie-4.1.0.armf.tar.gz" do
-    source "http://192.168.0.9:8000/oozie-4.1.0.armf.tar.gz"
+remote_file "/opt/oozie-#{node['oozie']['version']}.armf.tar.gz" do
+    source "http://192.168.0.9:8000/oozie-#{node['oozie']['version']}.armf.tar.gz"
     action :create_if_missing
 end
 
 execute "unpack oozie" do
-        command "tar -zxvf /opt/oozie-4.1.0.armf.tar.gz -C /opt/"
+        command "tar -zxvf /opt/oozie-#{node['oozie']['version']}.armf.tar.gz -C /opt/"
         user "root"
 end
 
 execute "create oozie symlink" do
-        command "if [ ! -d /opt/oozie ]; then ln -s /opt/oozie-4.1.0 /opt/oozie; fi"
+        command "if [ ! -d /opt/oozie ]; then ln -s /opt/oozie-#{node['oozie']['version']} /opt/oozie; fi"
         user "root"
 end
 
@@ -22,8 +22,8 @@ execute "Chown oozie" do
         user "root"
 end
 
-execute "Chown oozie-4.1.0" do
-        command "chown -R oozie.oozie /opt/oozie-4.1.0"
+execute "Chown oozie-#{node['oozie']['version']}" do
+        command "chown -R oozie.oozie /opt/oozie-#{node['oozie']['version']}"
         user "root"
 end
 
