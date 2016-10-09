@@ -1,6 +1,6 @@
 
 remote_file "/opt/pig-#{node['pig']['version']}.tar.gz" do
-    source "http://www.mirrorservice.org/sites/ftp.apache.org/pig/pig-#{node['pig']['version']}/#{node['pig']['version']}.tar.gz"
+    source "http://archive.apache.org/dist/pig/pig-#{node['pig']['version']}/#{node['pig']['version']}.tar.gz"
     action :create_if_missing
 end
 
