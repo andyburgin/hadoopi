@@ -32,7 +32,7 @@ template "/opt/livy/conf/livy.conf" do
 end
 
 
-remote_file "/opt/spark-#{node['spark']['version']}bin-hadoop#{node['spark']['hadoop-version']}.tgz" do
+remote_file "/opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz" do
     source "http://www.mirrorservice.org/sites/ftp.apache.org/spark/spark-#{node['spark']['version']}/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz"
     action :create_if_missing
 end
