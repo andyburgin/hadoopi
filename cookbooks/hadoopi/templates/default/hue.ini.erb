@@ -21,7 +21,7 @@
   secret_key=<%= @hue_secretkey %>
 
   # Execute this script to produce the Django secret key. This will be used when
-  # `secret_key` is not set.
+  # 'secret_key' is not set.
   ## secret_key_script=
 
   # Webserver listens on this address and port
@@ -81,8 +81,24 @@
   # SSL certificate password
   ## ssl_password=
 
-  # Execute this script to produce the SSL password. This will be used when `ssl_password` is not set.
+  # Execute this script to produce the SSL password. This will be used when 'ssl_password' is not set.
   ## ssl_password_script=
+
+  # X-Content-Type-Options: nosniff This is a HTTP response header feature that helps prevent attacks based on MIME-type confusion.
+  ## secure_content_type_nosniff=true
+
+  # X-Xss-Protection: \"1; mode=block\" This is a HTTP response header feature to force XSS protection.
+  ## secure_browser_xss_filter=true
+
+  # X-Content-Type-Options: nosniff This is a HTTP response header feature that helps prevent attacks based on MIME-type confusion.
+  ## secure_content_security_policy="script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google-analytics.com *.doubleclick.net *.mathjax.org data:;img-src 'self' *.google-analytics.com *.doubleclick.net *.tile.osm.org data:;style-src 'self' 'unsafe-inline';connect-src 'self';child-src 'none';object-src 'none'"
+
+  # Strict-Transport-Security HTTP Strict Transport Security(HSTS) is a policy which is communicated by the server to the user agent via HTTP response header field name “Strict-Transport-Security”. HSTS policy specifies a period of time during which the user agent(browser) should only access the server in a secure fashion(https).
+  ## secure_ssl_redirect=False
+  ## secure_redirect_host=0.0.0.0
+  ## secure_redirect_exempt=[]
+  ## secure_hsts_seconds=31536000
+  ## secure_hsts_include_subdomains=true
 
   # List of allowed and disallowed ciphers in cipher list format.
   # See http://www.openssl.org/docs/apps/ciphers.html for more information on
@@ -113,12 +129,13 @@
 
   # Tile layer server URL for the Leaflet map charts
   # Read more on http://leafletjs.com/reference.html#tilelayer
+  # Make sure you add the tile domain to the img-src section of the 'secure_content_security_policy' configuration parameter as well.
   ## leaflet_tile_layer=http://{s}.tile.osm.org/{z}/{x}/{y}.png
 
   # The copyright message for the specified Leaflet maps Tile Layer
   ## leaflet_tile_layer_attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 
-  # X-Frame-Options HTTP header value. Use 'DENY' to deny framing completely 
+  # X-Frame-Options HTTP header value. Use 'DENY' to deny framing completely
   ## http_x_frame_options=SAMEORIGIN
 
   # Enable X-Forwarded-Host header if the load balancer requires it.
@@ -142,6 +159,9 @@
 
   # Choose whether to show the new SQL editor.
   ## use_new_editor=true
+
+  # Enable saved default configurations for Hive, Impala, Spark, and Oozie.
+  ## use_default_configuration=false
 
   # The directory where to store the auditing logs. Auditing is disable if the value is empty.
   # e.g. /var/log/hue/audit.log
@@ -173,9 +193,9 @@
   #
   # Redaction works by searching a string for the [TRIGGER] string. If found,
   # the [REGEX] is used to replace sensitive information with the
-  # [REDACTION_MASK].  If specified with `log_redaction_string`, the
-  # `log_redaction_string` rules will be executed after the
-  # `log_redaction_file` rules.
+  # [REDACTION_MASK].  If specified with 'log_redaction_string', the
+  # 'log_redaction_string' rules will be executed after the
+  # 'log_redaction_file' rules.
   #
   # For example, here is a file that would redact passwords and social security numbers:
 
@@ -296,11 +316,18 @@
     # If set, defines period of inactivity in seconds after which failed logins will be forgotten
     ## login_cooloff_time=60
 
-    # If True, lock out based on IP and browser user agent
-    ## login_lock_out_by_combination_browser_user_agent_and_ip=false
+    # If True, lock out based on an IP address AND a user agent.
+    # This means requests from different user agents but from the same IP are treated differently.
+    ## login_lock_out_use_user_agent=false
 
     # If True, lock out based on IP and user
     ## login_lock_out_by_combination_user_and_ip=false
+
+    # If True, it will look for the IP address from the header defined at reverse_proxy_header.
+    ## behind_reverse_proxy=false
+
+    # If behind_reverse_proxy is True, it will look for the IP address from this header. Default: HTTP_X_FORWARDED_FOR
+    ## reverse_proxy_header=HTTP_X_FORWARDED_FOR
 
   # Configuration options for connecting to LDAP and Active Directory
   # -------------------------------------------------------------------
@@ -332,7 +359,7 @@
     ## bind_password=
 
     # Execute this script to produce the bind user password. This will be used
-    # when `bind_password` is not set.
+    # when 'bind_password' is not set.
     ## bind_password_script=
 
     # Pattern for searching for usernames -- Use <username> for the parameter
@@ -427,7 +454,7 @@
         ## bind_password=
 
         # Execute this script to produce the bind user password. This will be used
-        # when `bind_password` is not set.
+        # when 'bind_password' is not set.
         ## bind_password_script=
 
         # Pattern for searching for usernames -- Use <username> for the parameter
@@ -475,14 +502,14 @@
     #
     # Note that for sqlite3, 'name', below is a path to the filename. For other backends, it is the database name
     # Note for Oracle, options={"threaded":true} must be set in order to avoid crashes.
-    # Note for Oracle, you can use the Oracle Service Name by setting "port=0" and then "name=<host>:<port>/<service_name>".
+    # Note for Oracle, you can use the Oracle Service Name by setting "host=" and "port=" and then "name=<host>:<port>/<service_name>".
     # Note for MariaDB use the 'mysql' engine.
     ## engine=sqlite3
     ## host=
     ## port=
     ## user=
     ## password=
-    # Execute this script to produce the database password. This will be used when `password` is not set.
+    # Execute this script to produce the database password. This will be used when 'password' is not set.
     ## password_script=/path/script
     ## name=desktop/desktop.db
     ## options={}
@@ -582,6 +609,18 @@
   ## Show the notebook menu or not
   # show_notebooks=true
 
+  ## Flag to enable the bulk submission of queries as a background task through Oozie.
+  # enable_batch_execute=true
+
+  ## Flag to enable the SQL query builder of the table assist.
+  # enable_query_builder=true
+
+  ## Flag to enable the creation of a coordinator for the current SQL query.
+  # enable_query_scheduling=true
+
+  ## Flag to enable the Java document in editor and workflow.
+  # enable_java_document=true
+
   ## Base URL to Remote GitHub Server
   # github_remote_url=https://github.com
 
@@ -666,6 +705,10 @@
       ## Name of the collection handler
       # options='{"collection": "default"}'
 
+    [[[java]]]
+      name=Java
+      interface=oozie
+
     # [[[mysql]]]
     #   name=MySql JDBC
     #   interface=jdbc
@@ -676,12 +719,6 @@
 
   ## Main flag to override the automatic starting of the DBProxy server.
   # enable_dbproxy_server=true
-
-  ## Flag to enable the SQL query builder of the table assist.
-  # enable_query_builder=true
-
-  ## Flag to enable the creation of a coordinator for the current SQL query.
-  # enable_query_scheduling=true
 
 
 ###########################################################################
@@ -925,12 +962,8 @@
   # Port of the Livy Server.
   ## livy_server_port=8998
 
-  # Configure livy to start in local 'process' mode, or 'yarn' workers.
-  ## livy_server_session_kind=process
+  # Configure Livy to start in local 'process' mode, or 'yarn' workers.
   livy_server_session_kind=yarn
-
-  # If livy should use proxy users when submitting a job.
-  ## livy_impersonation_enabled=true
 
   # Host of the Sql Server
   ## sql_server_host=localhost
@@ -1066,6 +1099,9 @@
   # Choose whether Hue should validate certificates received from the server.
   ## ssl_cert_ca_verify=true
 
+  # Default path to Solr in ZooKeeper.
+  ## solr_zk_path=/solr
+
 
 ###########################################################################
 # Settings to configure Solr Indexer
@@ -1075,6 +1111,9 @@
 
   # Location of the solrctl binary.
   ## solrctl_path=/usr/bin/solrctl
+
+  # Flag to turn on the morphline based Solr indexer.
+  ## enable_new_indexer=false
 
 
 ###########################################################################
@@ -1102,6 +1141,8 @@
   # Whether to disalbe the job kill button for all users in the jobbrowser
   ## disable_killing_jobs=false
 
+  # Offset in bytes where a negative offset will fetch the last N bytes for the given log file (default 1MB).
+  ## log_offset=-1000000
 
 ###########################################################################
 # Settings to configure Sentry / Security App.
@@ -1321,7 +1362,7 @@
   # Path to a file containing the password private key.
   ## key_file_password=/path/key
 
-  # Execute this script to produce the private key password. This will be used when `key_file_password` is not set.
+  # Execute this script to produce the private key password. This will be used when 'key_file_password' is not set.
   ## key_file_password_script=/path/pwd.sh
 
   # A mapping from attributes in the response from the IdP to django user attributes.
@@ -1436,14 +1477,14 @@
     ## product_name=hue
     # A secret passphrase associated with the productName
     ## product_secret=hue
-    # Execute this script to produce the product secret. This will be used when `product_secret` is not set.
+    # Execute this script to produce the product secret. This will be used when 'product_secret' is not set.
     ## product_secret_script=
 
     # The email of the Optimizer account you want to associate with the Product.
     ## email=hue@gethue.com
     # The password associated with the Optimizer account you to associate with the Product.
     ## email_password=hue
-    # Execute this script to produce the email password. This will be used when `email_password` is not set.
+    # Execute this script to produce the email password. This will be used when 'email_password' is not set.
     ## password_script=
 
     # In secure mode (HTTPS), if Optimizer SSL certificates have to be verified against certificate authority.
