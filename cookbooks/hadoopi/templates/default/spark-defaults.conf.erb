@@ -25,7 +25,8 @@
 # spark.serializer                 org.apache.spark.serializer.KryoSerializer
 # spark.driver.memory              5g
 # spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
-spark.driver.memory                512m
-spark.executor.memory              512m
-spark.python.worker.memory         512m
-spark.driver.maxResultSize         512m
+spark.master                       yarn-cluster
+spark.network.timeout              500s
+spark.testing.reservedMemory       64000000
+spark.testing.memory               12800000
+spark.yarn.jar=hdfs://master01:54310/user/hduser/spark/spark-assembly-1.6.2-hadoop2.6.0.jar
