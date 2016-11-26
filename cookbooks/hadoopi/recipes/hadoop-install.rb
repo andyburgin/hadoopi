@@ -3,6 +3,7 @@ package "oracle-java8-jdk"
 package "libsnappy-java"
 package "libssl-dev"
 package "vim"
+package "r-base"
 
 remote_file "/opt/hadoop-#{node['hadoop']['version']}.armf.tar.gz" do
     source "http://192.168.0.9:8000/hadoop-#{node['hadoop']['version']}.armf.tar.gz"
