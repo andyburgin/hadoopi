@@ -31,6 +31,18 @@ template "/opt/livy/conf/livy.conf" do
         group 'hadoop'
 end
 
+template "/opt/livy/conf/log4j.properties" do
+        source "log4j.properties.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
+
+directory "/opt/livy/logs" do
+        owner "hduser"
+        group "hadoop"
+        mode  "0755"
+end
 
 remote_file "/opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz" do
     source "http://www.mirrorservice.org/sites/ftp.apache.org/spark/spark-#{node['spark']['version']}/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz"
