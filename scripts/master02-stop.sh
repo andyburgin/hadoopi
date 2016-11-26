@@ -7,5 +7,5 @@ echo "Stop hbase thrift server"
 su hduser - -c "kill $(ps -ef | grep ThriftServer | awk '{print $2}')"
 
 echo "Stop Livy"
-su hduser - -c "/opt/livy/bin/livy-server stop"
+su hduser - -c "kill $(ps -ef | grep livy | awk '{print $2}')"
 
