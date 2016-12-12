@@ -9,3 +9,5 @@ su hduser - -c "kill $(ps -ef | grep ThriftServer | awk '{print $2}')"
 echo "Stop Livy"
 su hduser - -c "kill $(ps -ef | grep livy | awk '{print $2}')"
 
+echo "Stop Solr"
+su hduser - -c "/opt/solr/bin/solr stop -all"
