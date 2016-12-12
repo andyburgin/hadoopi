@@ -43,6 +43,17 @@ package "mysql-server"
 package "libmysqlclient-dev"
 package "libmysql-java"
 
+template "/etc/mysql/my.cnf" do
+        source "my.cnf.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
+
+service "mysql" do
+  action :restart
+end
+
 execute "Create mysql db" do
         command "mysql -u root -e \"CREATE DATABASE hue;\""
         user "root"
