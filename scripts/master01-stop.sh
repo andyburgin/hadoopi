@@ -27,6 +27,6 @@ killall supervisor
 echo "Stop oozie"
 su oozie - -c "cd /opt/oozie && bin/oozied.sh stop"
 
-##echo "Stop Livy"
-##su hduser - -c "/opt/livy/bin/livy-server stop"
+echo "Stop Sqoop"
+su hduser - -c "/opt/sqoop/bin/sqoop.sh server stop"
 

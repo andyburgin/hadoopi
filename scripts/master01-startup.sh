@@ -27,6 +27,6 @@ su hue - -c "/opt/hue/build/env/bin/supervisor -d"
 echo "Start oozie"
 su oozie - -c "cd /opt/oozie && bin/oozied.sh start"
 
-##echo "Start Livy"
-##su hduser - -c "/opt/livy/bin/livy-server start"
+echo "Start Sqoop"
+su hduser - -c "/opt/sqoop/bin/sqoop.sh server start"
 
