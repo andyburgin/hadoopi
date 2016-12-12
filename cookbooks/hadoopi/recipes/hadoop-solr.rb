@@ -43,6 +43,12 @@ execute "chmod solr folder" do
         returns [0,1]
 end
 
+execute "chmod tmp folder" do
+        command "/opt/hadoop/bin/hadoop fs -chmod 777 /tmp"
+        user "hduser"
+        returns [0,1]
+end
+
 execute "stop hdfs" do
         command "/opt/hadoop/sbin/stop-dfs.sh"
         user "hduser"
