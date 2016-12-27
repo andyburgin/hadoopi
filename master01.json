@@ -8,13 +8,11 @@
 		"recipe[hadoopi::hadoop-hive]",
 		"recipe[hadoopi::hadoop-pig]",
                 "recipe[hadoopi::hadoop-oozie]",
-                "recipe[hadoopi::hadoop-sqoop]"
+                "recipe[hadoopi::hadoop-sqoop]",
+                "recipe[hadoopi::hadoop-solr-hdfs]",
+                "recipe[hadoopi::hadoop-spark-hdfs]"
 	],
 
-	"node": {
-		"hostname": "master01",
-		"ip_address": "192.168.0.11"
-	},
 
 	"hosts": {
 		"master01": "192.168.0.11",

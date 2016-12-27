@@ -65,7 +65,7 @@ execute "change spark file permissions" do
 end
 
 execute "change spark file permissions" do
-        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop2.6"
+        command "chown -R hduser:hadoop /opt/spark"
         user "root"
 end
 
@@ -83,26 +83,4 @@ template "/opt/spark/conf/spark-defaults.conf" do
         group 'hadoop'
 end
 
-# copy spark lib files to hdfs
-execute "start hdfs for copying of spark libs" do
-        command "/opt/hadoop/sbin/start-dfs.sh"
-        user "hduser"
-        returns [0,1]
-end
-
-execute "create spark lib folder" do
-        command "/opt/hadoop/bin/hadoop fs -mkdir /user/hduser/spark/"
-        user "hduser"
-        returns [0,1]
-end
-
-execute "copy libs" do
-        command "/opt/hadoop/bin/hadoop fs -copyFromLocal /opt/spark/lib/* /user/hduser/spark/"
-        user "hduser"
-        returns [0,1]
-end
-
-execute "stop hdfs" do
-        command "/opt/hadoop/sbin/stop-dfs.sh"
-        user "hduser"
-end
+# libs coppied to hdfs by recipe[hadoopi::hadoop-spark-hdfs]
