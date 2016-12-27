@@ -1,3 +1,4 @@
+wiressid = ENV["WIRESSID"]
 wirepass = ENV["WIREPASS"]
 node_ip_address = node["node"]["ip_address"]
 node_hostname = node["node"]["hostname"]
@@ -6,6 +7,7 @@ hosts = node["hosts"]
 template "/etc/wpa_supplicant/wpa_supplicant.conf" do
 	source "wpa_supplicant.conf.erb"
 	variables(
+                :wiressid => wiressid,
 		:wirepass => wirepass
 	)
 	mode 0600

@@ -3,7 +3,7 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 
 network={
-		ssid="TP-LINK_F0A2"
+		ssid="<%= @wiressid %>"
 		psk="<%= @wirepass %>"
 		key_mgmt=WPA-PSK
 }
