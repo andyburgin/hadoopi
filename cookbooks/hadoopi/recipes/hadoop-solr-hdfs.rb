@@ -5,22 +5,23 @@ execute "start hdfs for solr" do
         returns [0,1]
 end
 
+execute "wait 10 secs" do
+        command "sleep 10"
+end 
+
 execute "create solr folder" do
-        command "/opt/hadoop/bin/hadoop fs -mkdir /solr"
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /solr"
         user "hduser"
-        returns [0,1]
 end
 
 execute "chmod solr folder" do
         command "/opt/hadoop/bin/hadoop fs -chmod 777 /solr"
         user "hduser"
-        returns [0,1]
 end
 
 execute "chmod tmp folder" do
         command "/opt/hadoop/bin/hadoop fs -chmod 777 /tmp"
         user "hduser"
-        returns [0,1]
 end
 
 execute "stop hdfs" do

@@ -22,16 +22,18 @@ execute "start hdfs for copying of spark libs" do
         returns [0,1]
 end
 
+execute "wait 10 secs" do
+        command "sleep 10"
+end
+
 execute "create spark lib folder" do
-        command "/opt/hadoop/bin/hadoop fs -mkdir /user/hduser/spark/"
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /user/hduser/spark/"
         user "hduser"
-        returns [0,1]
 end
 
 execute "copy libs" do
-        command "/opt/hadoop/bin/hadoop fs -copyFromLocal /opt/spark-#{node['spark']['version']}-bin-hadoop2.6/lib/* /user/hduser/spark/"
+        command "/opt/hadoop/bin/hadoop fs -copyFromLocal -f /opt/spark-#{node['spark']['version']}-bin-hadoop2.6/lib/* /user/hduser/spark/"
         user "hduser"
-        returns [0,1]
 end
 
 execute "stop hdfs" do
