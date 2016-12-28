@@ -28,5 +28,5 @@ echo "Start oozie"
 su oozie - -c "cd /opt/oozie && bin/oozied.sh start"
 
 echo "Start Sqoop"
-su hduser - -c "/opt/sqoop/bin/sqoop.sh server start"
+su hduser - -c "cd /opt/sqoop/ && /opt/sqoop/bin/sqoop.sh server start"
 
