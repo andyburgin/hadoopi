@@ -65,6 +65,10 @@ execute "start hdfs for config" do
         returns [0,1]
 end
 
+execute "wait 10 secs" do
+        command "sleep 10"
+end
+
 execute "create oozie home" do
         command "/opt/hadoop/bin/hadoop fs -mkdir /user/oozie"
         user "hduser"

@@ -12,6 +12,10 @@ execute "start hdfs for config" do
 	user "hduser"
 end
 
+execute "wait 10 secs" do
+        command "sleep 10"
+end
+
 execute "create user home" do
         command "/opt/hadoop/bin/hadoop fs -mkdir /user"
         user "hduser"
