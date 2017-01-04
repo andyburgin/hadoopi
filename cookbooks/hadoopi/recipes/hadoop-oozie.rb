@@ -65,32 +65,30 @@ execute "start hdfs for config" do
         returns [0,1]
 end
 
-execute "wait 10 secs" do
-        command "sleep 10"
-end
-
 execute "create oozie home" do
-        command "/opt/hadoop/bin/hadoop fs -mkdir /user/oozie"
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /user/oozie"
         user "hduser"
-        returns [0,1]
+        retry_delay 5
+        retries 5
 end
 
 execute "Chown oozie home" do
         command "/opt/hadoop/bin/hadoop fs -chown oozie:supergroup /user/oozie"
         user "hduser"
-        returns [0,1]
+        retry_delay 5
+        retries 5
 end
 
 execute "create oozie shared lib on hdfs" do
         command "cd /opt/oozie && bin/oozie-setup.sh sharelib create -fs hdfs://master01:54310"
         user "oozie"
-        returns [0,1]
 end
 
 execute "Chmod /tmp" do
         command "/opt/hadoop/bin/hadoop fs -chmod 777 /tmp"
         user "hduser"
-        returns [0,1]
+        retry_delay 5
+        retries 5
 end
 
 execute "stop hdfs" do
