@@ -19,6 +19,11 @@ execute "chmod solr folder" do
         user "hduser"
 end
 
+execute "create tmp folder" do
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /tmp"
+        user "hduser"
+end
+
 execute "chmod tmp folder" do
         command "/opt/hadoop/bin/hadoop fs -chmod 777 /tmp"
         user "hduser"
