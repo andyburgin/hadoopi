@@ -15,6 +15,8 @@ end
 execute "create user home" do
         command "/opt/hadoop/bin/hadoop fs -mkdir /user"
         user "hduser"
+        retry_delay 5
+        retries 5
 end
 
 execute "create hduser home" do
