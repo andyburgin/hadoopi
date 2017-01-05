@@ -84,6 +84,13 @@ execute "create oozie shared lib on hdfs" do
         user "oozie"
 end
 
+execute "create tmp folder" do
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /tmp"
+        user "hduser"
+        retry_delay 5
+        retries 5
+end
+
 execute "Chmod /tmp" do
         command "/opt/hadoop/bin/hadoop fs -chmod 777 /tmp"
         user "hduser"
