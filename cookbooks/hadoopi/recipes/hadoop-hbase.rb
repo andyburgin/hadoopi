@@ -32,3 +32,10 @@ template "/opt/hbase/conf/hbase-env.sh" do
              :maxmem => node['hadoop']['maxmem']
         )
 end
+
+template "/opt/hbase/conf/hbase-site.xml" do
+        source "hbase-site.xml.erb"
+        mode 0644
+        user 'hduser'
+        group 'hadoop'
+end
