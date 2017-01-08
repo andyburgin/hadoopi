@@ -3,7 +3,7 @@ user "oozie"
 package "zip"
 
 remote_file "/opt/oozie-#{node['oozie']['version']}.armf.tar.gz" do
-    source "http://192.168.0.9:8000/oozie-#{node['oozie']['version']}.armf.tar.gz"
+    source "#{node['hadoop']['repobase']}/oozie-#{node['oozie']['version']}.armf.tar.gz"
     action :create_if_missing
 end
 

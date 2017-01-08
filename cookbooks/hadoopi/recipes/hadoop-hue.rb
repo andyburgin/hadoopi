@@ -4,7 +4,7 @@ package "libxml2"
 package "libxslt-dev"
 
 remote_file "/opt/hue-#{node['hue']['version']}.armf.tar.gz" do
-    source "http://192.168.0.9:8000/hue-#{node['hue']['version']}.armf.tar.gz"
+    source "#{node['hadoop']['repobase']}i/hue-#{node['hue']['version']}.armf.tar.gz"
     action :create_if_missing
 end
 

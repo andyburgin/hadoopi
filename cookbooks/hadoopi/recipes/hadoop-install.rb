@@ -6,7 +6,7 @@ package "vim"
 package "r-base"
 
 remote_file "/opt/hadoop-#{node['hadoop']['version']}.armf.tar.gz" do
-    source "http://192.168.0.9:8000/hadoop-#{node['hadoop']['version']}.armf.tar.gz"
+    source "#{node['hadoop']['repobase']}/hadoop-#{node['hadoop']['version']}.armf.tar.gz"
     action :create_if_missing
 end
 

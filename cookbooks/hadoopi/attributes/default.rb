@@ -1,7 +1,7 @@
 #hue
 default['hue']['secretkey']="qpbdxoewsqlkhztybvfidtvwekftusgdlofbcfghaswuicmqp"
 default['hadoop']['maxmem']=512
-
+default['hadoop']['repobase']="http://192.168.0.9:8000/"
 
 #versions
 default['hadoop']['version'] = '2.6.4'
