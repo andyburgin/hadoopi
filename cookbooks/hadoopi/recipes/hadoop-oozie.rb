@@ -55,14 +55,12 @@ end
 execute "create oozie db" do
         command "cd /opt/oozie && bin/ooziedb.sh create -sqlfile oozie.sql -run"
         user "oozie"
-        returns [0,1]
 end 
 
 # create sharelib
 execute "start hdfs for config" do
         command "/opt/hadoop/sbin/start-dfs.sh"
         user "hduser"
-        returns [0,1]
 end
 
 execute "create oozie home" do
@@ -82,6 +80,13 @@ end
 execute "create oozie shared lib on hdfs" do
         command "cd /opt/oozie && bin/oozie-setup.sh sharelib create -fs hdfs://master01:54310"
         user "oozie"
+end
+
+execute "create tmp folder" do
+        command "/opt/hadoop/bin/hadoop fs -mkdir -p /tmp"
+        user "hduser"
+        retry_delay 5
+        retries 5
 end
 
 execute "Chmod /tmp" do

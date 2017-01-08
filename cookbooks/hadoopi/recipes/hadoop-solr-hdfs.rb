@@ -7,6 +7,8 @@ end
 execute "create solr folder" do
         command "/opt/hadoop/bin/hadoop fs -mkdir -p /solr"
         user "hduser"
+        retry_delay 5
+        retries 5
 end
 
 execute "chmod solr folder" do
