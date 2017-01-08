@@ -39,3 +39,10 @@ template "/opt/hbase/conf/hbase-site.xml" do
         user 'hduser'
         group 'hadoop'
 end
+
+directory "/opt/hbase/datdDir" do
+        owner "hduser"
+        group "hadoop"
+        mode  "0777"
+end
+
