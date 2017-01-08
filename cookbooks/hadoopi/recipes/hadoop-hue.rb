@@ -63,7 +63,6 @@ end
 execute "Create mysql hue user" do
         command "mysql -u root -e \"CREATE USER hue IDENTIFIED BY 'huepassword';\""
         user "root"
-	returns [0,1]
 end
 
 execute "Grant hue user access to mysql db" do
