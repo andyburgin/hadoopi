@@ -15,6 +15,12 @@ execute "unpack hadoop" do
 	user "root"
 end
 
+# tidy up incompatible jline vers
+execute "tidy up incompatible jline vers" do
+        command"/opt/hadoop -name "jline-0.9.94.jar" -exec rm {} \;"
+        user "hduser"
+end
+
 execute "create hadoop symlink" do
 	command "if [ ! -d /opt/hadoop ]; then ln -s /opt/hadoop-#{node['hadoop']['version']} /opt/hadoop; fi"
 	user "root"
