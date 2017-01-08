@@ -17,7 +17,7 @@ end
 
 # tidy up incompatible jline vers
 execute "tidy up incompatible jline vers" do
-        command"/opt/hadoop -name "jline-0.9.94.jar" -exec rm {} \;"
+        command "find /opt/hadoop-#{node['hadoop']['version']} -name \"jline-0.9.94.jar\" -exec rm -f {} \\;"
         user "hduser"
 end
 
