@@ -33,8 +33,6 @@ template "/home/hduser/.ssh/id_rsa.pub" do
         mode  "0644"
 end
 
-
-
 execute "create authorized keys" do
 	user "hduser"
 	group "hadoop"
