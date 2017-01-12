@@ -19,12 +19,6 @@ directory "/home/hduser/.ssh" do
 	mode  "0700"
 end
 
-#execute "generate ssh keys" do
-#	user "hduser"
-#	group "hadoop"
-#	command "if [ ! -f /home/hduser/.ssh/id_rsa ]; then  ssh-keygen -t rsa -f /home/hduser/.ssh/id_rsa -q -P \"\"; fi"
-#end
-
 template "/home/hduser/.ssh/id_rsa" do
         source "id_rsa.erb"
         owner "hduser"
