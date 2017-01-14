@@ -38,6 +38,21 @@ template "/opt/hue/desktop/conf/hue.ini" do
         )
 end
 
+template "/opt/hue/apps/oozie/examples/unmanaged/hive/hive-config.xml" do
+        source "hive-config.xml.erb"
+        mode 0644
+        user 'hue'
+        group 'hue'
+end
+
+template "/opt/hue/apps/oozie/examples/managed/hive/hive-config.xml" do
+        source "hive-config.xml.erb"
+        mode 0644
+        user 'hue'
+        group 'hue'
+end
+
+
 # install mysql for hue data
 package "mysql-server"
 package "libmysqlclient-dev"
