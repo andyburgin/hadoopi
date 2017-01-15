@@ -18,7 +18,7 @@ end
 # tidy up incompatible jline vers
 execute "tidy up incompatible jline vers" do
         command "find /opt/hadoop-#{node['hadoop']['version']} -name \"jline-0.9.94.jar\" -exec rm -f {} \\;"
-        user "hduser"
+        user "root"
 end
 
 execute "create hadoop symlink" do
