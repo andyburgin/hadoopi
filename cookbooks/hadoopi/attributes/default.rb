@@ -1,7 +1,7 @@
 #hue
 default['hue']['secretkey']="qpbdxoewsqlkhztybvfidtvwekftusgdlofbcfghaswuicmqp"
 default['hadoop']['maxmem']=512
-default['hadoop']['repobase']="http://192.168.0.9:8000/"
+default['hadoop']['repobase']="http://10.0.0.9:8000/"
 
 #versions
 default['hadoop']['version'] = '2.6.4'
@@ -20,10 +20,10 @@ default['solr']['version'] = '4.10.4'
 
 #networking
 default['hosts''] =  {
-    "master01": "192.168.0.11",
-    "master02": "192.168.0.12",
-    "worker01": "192.168.0.21",
-    "worker02": "192.168.0.22",
-    "worker03": "192.168.0.23"
+    "master01": "10.0.0.11",
+    "master02": "10.0.0.12",
+    "worker01": "10.0.0.21",
+    "worker02": "10.0.0.22",
+    "worker03": "10.0.0.23"
 }
-default['gateway'] = '192.168.0.1'
+default['gateway'] = '10.0.0.1'

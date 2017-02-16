@@ -40,7 +40,7 @@ end
 
 # install mysql driver
 remote_file "/opt/mysql-connector-java-#{node['sqoopmysql']['version']}.tar.gz" do
-        source "http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-#{node['sqoopmysql']['version']}.tar.gz"
+        source "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-#{node['sqoopmysql']['version']}.tar.gz"
         action :create_if_missing
 end
 
