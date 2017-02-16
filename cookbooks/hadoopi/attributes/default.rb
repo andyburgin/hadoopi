@@ -17,3 +17,13 @@ default['oozie']['version'] = '4.3.0'
 default['sqoop']['version'] = '1.99.4'
 default['sqoopmysql']['version'] = '5.1.40'
 default['solr']['version'] = '4.10.4'
+
+#networking
+default['hosts''] =  {
+    "master01": "192.168.0.11",
+    "master02": "192.168.0.12",
+    "worker01": "192.168.0.21",
+    "worker02": "192.168.0.22",
+    "worker03": "192.168.0.23"
+}
+default['gateway'] = '192.168.0.1'

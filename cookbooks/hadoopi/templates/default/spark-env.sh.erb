@@ -68,4 +68,4 @@
 # - SPARK_IDENT_STRING  A string representing this instance of spark. (Default: $USER)
 # - SPARK_NICENESS      The scheduling priority for daemons. (Default: 0)
 
-SPARK_MASTER_IP=192.168.0.12
+SPARK_MASTER_IP=<%= node["hosts"]["master02"] %>
