@@ -20,7 +20,7 @@ default['sqoopmysql']['version'] = '5.1.40'
 default['solr']['version'] = '4.10.4'
 
 #networking
-default['hosts''] =  {
+default['hosts'] =  {
     "master01": "10.0.0.11",
     "master02": "10.0.0.12",
     "worker01": "10.0.0.21",
