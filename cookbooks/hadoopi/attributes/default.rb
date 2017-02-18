@@ -5,7 +5,6 @@ default['hadoop']['repobase']="http://10.0.0.9:8000/"
 
 #versions
 default['hadoop']['version'] = '2.6.4'
-default['zookeper']['version'] = '3.4.8'
 default['livy']['version'] = '0.2.0'
 default['spark']['version'] = '1.6.2'
 default['spark']['hadoop-version'] = '2.6'
