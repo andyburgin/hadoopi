@@ -338,10 +338,15 @@ I won't go through every example using installed in hue, watching the vide will 
 
 ### Hive Examples
 From the "Query Editor" menu select "Hive", in the resulting query window select one of the example scripts e.g. "Sample Salary Growth" and hit the "play" button to submit the query.
+
 ![Hive Query](doc/images/hive-submit.jpg)
+
 Choose the "Job Browser" icon and open in a new tab, watch the job transition from Accepted->Running->Succeeded.
+
 ![Hive Job](doc/images/hive-job.jpg)
+
 Return to the original query tab and you'll see the results displayed in the browser.
+
 ![Hive Results](doc/images/hive-results.jpg)
 
 ### Pig Example
@@ -350,21 +355,28 @@ From the "Query Editor" menu select "Pig", then select the "samples" tab and the
       upper_case = FOREACH data GENERATE UPPER(text);
 
 Click the play button to submit the query, you'll be prompted to specify an output path, so choose "/tmp/pigout" and click "Yes".
+
 ![Pig Query](doc/images/pig-query.jpg)
+
 Go to the job browser and wait for the two generated jobs to finish, then click the "HDFS Browser" icon and navigate to /tmp/pigout and view on e of the "part-m-????" file and see the generated text.
+
 ![Pig Results](doc/images/pig-results.jpg)
 
 ### Spark Notebooks
 Spark notebooks are one of the best features of Hue, allowing you to edit code directly in the browser and run it via spark on the cluster. We'll try out the three supported languages Python, Scala and R (we don't have Impala support).
 
 Select "Notebooks" menu and open the "Sample Notebook", we'll need to start a session for each language, we'll try Python first so click the "context" icon to open the context menu and then choose "Recreate" next to the PySpark option, this creates a Spark job viewable via the job browser.
+
 ![PySpark Session](doc/images/spark-pyspark-session.jpg)
+
 When the session is ready and the job is running, click the "play" icon next to each of the 4 examples and the cluster will calculate the result and display it in the browser, feel free to experiment with the results and edit the code.
 
 When you have finished with the PySpark examples you need to kill the session/job, so on the context menu click "close" next to the PySpark menu.
 
 To try the Scala examples click "Recreate" next to the Scala option on the context menu to create the session and associated job. When running you'll be able to edit Scala code in the browser and interact with the results.
+
 ![Scala Session](doc/images/spark-scala-session.jpg)
+
 After trying both examples kill the session/job by closing the session on the context menu.
 
 Skip over the Impala examples as they aren't supported.
@@ -374,12 +386,16 @@ Start the R session by clicking "create" next to the option and when the job/ses
 The R example doesn't used HDFS so you'll need to SSH onto each worker and run:
     curl https://raw.githubusercontent.com/cloudera/hue/master/apps/beeswax/data/web_logs_1.csv -o /tmp/web_logs_1.csv
 Back on the Notebook click the play icon next to the code and examine the output including plot.
+
 ![R Session](doc/images/spark-r-session.jpg)
+
 Finally close the session on the context menu so the spark job ends.
 
 ### Sqoop example
 We're going to use Sqoop to transfer the employee sample data we installed earlier into HDFS. To do this we'll need to configure two Sqoop links and a Sqoop Job.
+
 ![Sqoop Example](doc/images/sqoop-example.jpg)
+
 Create the first link by selecting the "Data Browser" and then "Sqoop". Choose "Manage Links" then "Click here to add one"
 
 * Name: mysql employees in
@@ -433,9 +449,13 @@ Start the job by clicking "Save and run", navigate to the job browser and wait f
 
 ### Ozzie Examples
 There are many Ozzie examples installed, so I'll only talk about a few of them here. Lets firstly run the Shell example. Select "Query Editors" from the menu  and the "Job Designer", next click the "Shell" example, you'll be presented with the job editor. I for scroll down you'll see a parameter to the "hello.py" command is "World!".
+
 ![Oozie Shell](doc/images/oozie-shell.jpg)
+
 Click the "Submit" button (then confirm) and you'll be presented with the workflow view of the job, wait for the job to run and and select the log icon next "hello.py". In the resulting log you'll see the phrase "Hello World!"
+
 ![Oozie Shell](doc/images/oozie-log.jpg)
+
 Next let's look at amore complicated workflow, from the menu select "Workflows" -> "Editors" -> "Workflows", on the resulting page select "Spark" and you'll be presented with the job configuration page, for the spark workflow to run we will need to configure the settings for spark, click the "pen" icon to edit the job, next click the "cogs" icon on the spark step to access the steps properties. In the "Options List" filed enter:
 
     --conf spark.testing.reservedMemory="64000000" --conf spark.testing.memory="128000000" --executor-memory 256m --driver-memory 256m --num-executors 1
@@ -443,6 +463,7 @@ Next let's look at amore complicated workflow, from the menu select "Workflows" 
 ![Oozie Spark Properties](doc/images/oozie-spark-properties.jpg)
 
 Clck the "disk" icon to save the changs to the workflow and click the "play" icon to submit the job, enter "/tmp/sparkout" into the output field and hit "Submit". Again you'll be presented with the workflow view, wait for the job to finish and then use the hdfs browser to navigate to the "/tmp/sparkout" folder and view one of the data files to check the spark job copied the intended files.
+
 ![Oozie Spark Files](doc/images/oozie-spark-files.jpg)
 
 ### Solr Dashboards
