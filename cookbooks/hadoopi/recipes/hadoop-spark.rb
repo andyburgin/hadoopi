@@ -24,13 +24,6 @@ execute "change livy file permissions" do
         user "root"
 end
 
-template "/opt/livy/conf/livy.conf" do
-        source "livy.conf.erb"
-        mode 0644
-        user 'hduser'
-        group 'hadoop'
-end
-
 template "/opt/livy/conf/log4j.properties" do
         source "log4j.properties.erb"
         mode 0644
