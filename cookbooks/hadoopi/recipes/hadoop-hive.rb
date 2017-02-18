@@ -1,5 +1,5 @@
 remote_file "/opt/apache-hive-#{node['hive']['version']}-bin.tar.gz" do
-    source "http://www.mirrorservice.org/sites/ftp.apache.org/hive/stable/apache-hive-#{node['hive']['version']}-bin.tar.gz"
+    source "https://archive.apache.org/dist/hive/hive-#{node['hive']['version']}/apache-hive-#{node['hive']['version']}-bin.tar.gz"
     action :create_if_missing
 end
 

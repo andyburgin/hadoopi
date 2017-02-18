@@ -1,5 +1,5 @@
 remote_file "/opt/hbase-#{node['hbase']['version']}-bin.tar.gz" do
-    source "http://www.mirrorservice.org/sites/ftp.apache.org/hbase/stable/hbase-#{node['hbase']['version']}-bin.tar.gz"
+    source "https://archive.apache.org/dist/hbase/#{node['hbase']['version']}/hbase-#{node['hbase']['version']}-bin.tar.gz"
     action :create_if_missing
 end
 
