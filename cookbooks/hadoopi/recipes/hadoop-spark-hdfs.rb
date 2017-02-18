@@ -11,7 +11,7 @@ execute "unpack spark" do
 end
 
 execute "change spark file permissions" do
-        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop2.6"
+        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}"
         user "root"
 end
 
@@ -29,7 +29,7 @@ execute "create spark lib folder" do
 end
 
 execute "copy libs" do
-        command "/opt/hadoop/bin/hadoop fs -copyFromLocal -f /opt/spark-#{node['spark']['version']}-bin-hadoop2.6/lib/* /user/hduser/spark/"
+        command "/opt/hadoop/bin/hadoop fs -copyFromLocal -f /opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}/lib/* /user/hduser/spark/"
         user "hduser"
         retry_delay 5
         retries 5

@@ -60,7 +60,7 @@ execute "create spark symlink" do
 end
 
 execute "change spark file permissions" do
-        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop2.6"
+        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}"
         user "root"
 end
 
