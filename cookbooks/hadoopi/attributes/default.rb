@@ -21,10 +21,10 @@ default['solr']['version'] = '4.10.4'
 
 #networking
 default['hosts'] =  {
-    "master01": "10.0.0.11",
-    "master02": "10.0.0.12",
-    "worker01": "10.0.0.21",
-    "worker02": "10.0.0.22",
-    "worker03": "10.0.0.23"
+    "master01" => "10.0.0.11",
+    "master02" => "10.0.0.12",
+    "worker01" => "10.0.0.21",
+    "worker02" => "10.0.0.22",
+    "worker03" => "10.0.0.23"
 }
 default['gateway'] = '10.0.0.1'
