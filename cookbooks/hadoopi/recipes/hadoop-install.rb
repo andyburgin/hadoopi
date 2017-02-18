@@ -94,6 +94,9 @@ template "/opt/hadoop/etc/hadoop/yarn-site.xml" do
         mode 0644
         user 'hduser'
         group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
 end
 
 template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
@@ -101,6 +104,9 @@ template "/opt/hadoop/etc/hadoop/mapred-site.xml" do
         mode 0644
         user 'hduser'
         group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
 end
 
 
