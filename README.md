@@ -479,7 +479,7 @@ Select "Search" from the menu and then each of the dashboards in turn (Twitter, 
 You'll see each present a variety of charts, graphs, maps and text along with interactive filtering features to explore the data held in the solr search indexes.
 
 ## Reminder, Power Off the Cluster
-Once you have finished experimenting with the cluster please don't just turn off the power, you rick corrupting your data and possibly the sd card. So follow the procedure of running the shutdown scripts on master01 and master02, then running the poweroff command on each of the pis before turning the power off.
+Once you have finished experimenting with the cluster please don't just turn off the power, you risk corrupting your data and possibly the sd card. So follow the procedure of running the shutdown scripts on master01 and master02, then running the poweroff command on each of the pis before turning the power off.
 
 ## Wrapup
 I hope you have fun setting up and playing with the code, I learned a tonne of stuff setting it up and I hope you do too. If you have any improvements then please send pull requests to github, any problems and I'll respond to issues there too.
