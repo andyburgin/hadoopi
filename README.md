@@ -162,6 +162,7 @@ Download the patch to fix the example loading issues with 3.11.0, patch the desk
 Change the driverMemory and executorMemory defaults from 1GB to 256MB in desktop/libs/notebook/src/notebook/connectors/spark_shell.py
 
 Then build the apps
+
 	make apps
 
 Then package them up:
@@ -462,7 +463,7 @@ Next let's look at amore complicated workflow, from the menu select "Workflows" 
 
 ![Oozie Spark Properties](doc/images/oozie-spark-properties.jpg)
 
-Clck the "disk" icon to save the changs to the workflow and click the "play" icon to submit the job, enter "/tmp/sparkout" into the output field and hit "Submit". Again you'll be presented with the workflow view, wait for the job to finish and then use the hdfs browser to navigate to the "/tmp/sparkout" folder and view one of the data files to check the spark job copied the intended files.
+Cilck the "disk" icon to save the changs to the workflow and click the "play" icon to submit the job, enter "/tmp/sparkout" into the output field and hit "Submit". Again you'll be presented with the workflow view, wait for the job to finish and then use the hdfs browser to navigate to the "/tmp/sparkout" folder and view one of the data files to check the spark job copied the intended files.
 
 ![Oozie Spark Files](doc/images/oozie-spark-files.jpg)
 
