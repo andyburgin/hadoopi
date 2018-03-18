@@ -42,10 +42,6 @@ execute "restart networking" do
         command "service networking restart"
 end
 
-execute "bring up wlan0" do
-        command "ifup wlan0"
-end
-
 package "nscd" do
 	action :install
 end
