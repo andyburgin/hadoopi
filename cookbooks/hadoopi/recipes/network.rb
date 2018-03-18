@@ -5,17 +5,6 @@ node_hostname = node["node"]["hostname"]
 hosts = node["hosts"]
 gateway = node['gateway']
 
-template "/etc/wpa_supplicant/wpa_supplicant.conf" do
-	source "wpa_supplicant.conf.erb"
-	variables(
-                :wiressid => wiressid,
-		:wirepass => wirepass
-	)
-	mode 0600
-	user 'root'
-	group 'root'
-end
-
 template "/etc/dhcpcd.conf" do
         source "dhcpcd.conf.erb"
         variables(

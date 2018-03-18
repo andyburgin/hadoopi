@@ -10,6 +10,6 @@
 
 	"node": {
 		"hostname": "master02",
-		"ip_address": "10.0.0.12"
+		"ip_address": "192.168.2.22"
 	}
 }
