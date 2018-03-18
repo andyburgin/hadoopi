@@ -4,7 +4,7 @@ remote_file "/opt/livy-server-#{node['livy']['version']}.zip" do
     action :create_if_missing
 end
 
-execute "unpack spark" do
+execute "unpack livy" do
         command "unzip -o /opt/livy-server-#{node['livy']['version']}.zip -d /opt"
         user "root"
 end
