@@ -57,7 +57,7 @@ execute "change spark file permissions" do
         user "root"
 end
 
-execute "change spark file permissions" do
+execute "change spark symlink file permissions" do
         command "chown -R hduser:hadoop /opt/spark"
         user "root"
 end
