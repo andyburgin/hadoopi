@@ -1,9 +1,6 @@
 {
         "run_list": [
-		"recipe[hadoopi::user]",
-		"recipe[hadoopi::hadoop-install]",
-		"recipe[hadoopi::hadoop-hdfs]",
-		"recipe[hadoopi::hadoop-hue]"
+		"recipe[hadoopi::network]"
 	],
 
         "node": {
