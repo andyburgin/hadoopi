@@ -18,7 +18,7 @@
 
   # Set this to a random string, the longer the better.
   # This is used for secure hashing in the session store.
-  secret_key=
+  secret_key=<%= @hue_secretkey %>
 
   # Execute this script to produce the Django secret key. This will be used when
   # 'secret_key' is not set.
@@ -35,7 +35,7 @@
   ## hue_load_balancer=
 
   # Time zone name
-  time_zone=America/Los_Angeles
+  time_zone=Europe/London
 
   # Enable or disable Django debug mode.
   django_debug_mode=false
@@ -69,7 +69,7 @@
   ## default_user=hue
 
   # This should be the hadoop cluster admin
-  ## default_hdfs_superuser=hdfs
+  default_hdfs_superuser=hduser
 
   # If set to false, runcpserver will not actually start the web server.
   # Used if Apache is being used as a WSGI container.
@@ -167,7 +167,7 @@
 
   # Comma separated list of apps to not load at server startup.
   # e.g.: pig,zookeeper
-  ## app_blacklist=
+  app_blacklist=impala
 
   # Id of the cluster where Hue is located.
   ## cluster_id='default'
@@ -590,6 +590,12 @@
     ## options={}
     # Database schema, to be used only when public schema is revoked in postgres
     ## schema=public
+    host=localhost
+    port=3306
+    engine=mysql
+    user=hue
+    password=huepassword
+    name=hue
 
   # Configuration options for specifying the Desktop session.
   # For more info, see https://docs.djangoproject.com/en/1.4/topics/http/sessions/
@@ -866,15 +872,15 @@
 
     [[[default]]]
       # Enter the filesystem uri
-      fs_defaultfs=hdfs://localhost:8020
+      fs_defaultfs=hdfs://master01:54310
 
       # NameNode logical name.
-      ## logical_name=
+      logical_name=hdfs://master01:54310
 
       # Use WebHdfs/HttpFs as the communication mechanism.
       # Domain should be the NameNode or HttpFs host.
       # Default port is 14000 for HttpFs.
-      ## webhdfs_url=http://localhost:50070/webhdfs/v1
+      webhdfs_url=http://master01:50070/webhdfs/v1
 
       # Change this if your HDFS cluster is Kerberos-secured
       ## security_enabled=false
@@ -884,7 +890,7 @@
       ## ssl_cert_ca_verify=True
 
       # Directory of the Hadoop configuration
-      ## hadoop_conf_dir=$HADOOP_CONF_DIR when set or '/etc/hadoop/conf'
+      hadoop_conf_dir=/opt/hadoop/etc/hadoop
 
   # Configuration for YARN (MR2)
   # ------------------------------------------------------------------------
@@ -892,10 +898,10 @@
 
     [[[default]]]
       # Enter the host on which you are running the ResourceManager
-      ## resourcemanager_host=localhost
+      resourcemanager_host=master01
 
       # The port where the ResourceManager IPC listens on
-      ## resourcemanager_port=8032
+      resourcemanager_port=8050
 
       # Whether to submit jobs to this cluster
       submit_to=True
@@ -907,16 +913,16 @@
       ## security_enabled=false
 
       # URL of the ResourceManager API
-      ## resourcemanager_api_url=http://localhost:8088
+      resourcemanager_api_url=http://master01:8088
 
       # URL of the ProxyServer API
       ## proxy_api_url=http://localhost:8088
 
       # URL of the HistoryServer API
-      ## history_server_api_url=http://localhost:19888
+      history_server_api_url=http://master01:19888
 
       # URL of the Spark History Server
-      ## spark_history_server_url=http://localhost:18088
+      spark_history_server_url=http://master02:18088
 
       # In secure mode (HTTPS), if SSL certificates from YARN Rest APIs
       # have to be verified against certificate authority
@@ -977,13 +983,13 @@
 
   # Host where HiveServer2 is running.
   # If Kerberos security is enabled, use fully-qualified domain name (FQDN).
-  ## hive_server_host=localhost
+  hive_server_host=master01
 
   # Port where HiveServer2 Thrift server runs on.
   ## hive_server_port=10000
 
   # Hive configuration directory, where hive-site.xml is located
-  ## hive_conf_dir=/etc/hive/conf
+  hive_conf_dir=/opt/hive/conf
 
   # Timeout in seconds for thrift calls to Hive service
   ## server_conn_timeout=120
@@ -1103,13 +1109,13 @@
 
 [spark]
   # Host address of the Livy Server.
-  ## livy_server_host=localhost
+  livy_server_host=master02
 
   # Port of the Livy Server.
   ## livy_server_port=8998
 
   # Configure Livy to start in local 'process' mode, or 'yarn' workers.
-  ## livy_server_session_kind=yarn
+  livy_server_session_kind=yarn
 
   # Whether Livy requires client to perform Kerberos authentication.
   ## security_enabled=false
@@ -1190,7 +1196,7 @@
   # For autocompletion, fill out the librdbms section.
 
   # Sqoop server URL
-  ## server_url=http://localhost:12000/sqoop
+  server_url=http://master01:12000/sqoop
 
   # Path to configuration directory
   ## sqoop_conf_dir=/etc/sqoop2/conf
@@ -1219,7 +1225,7 @@
   # Comma-separated list of HBase Thrift servers for clusters in the format of '(name|host:port)'.
   # Use full hostname with security.
   # If using Kerberos we assume GSSAPI SASL, not PLAIN.
-  ## hbase_clusters=(Cluster|localhost:9090)
+  hbase_clusters=(Cluster|master02:9090)
 
   # HBase configuration directory, where hbase-site.xml is located.
   ## hbase_conf_dir=/etc/hbase/conf
@@ -1240,7 +1246,7 @@
 [search]
 
   # URL of the Solr Server
-  ## solr_url=http://localhost:8983/solr/
+  solr_url=http://master02:8983/solr/
 
   # Requires FQDN in solr_url if enabled
   ## security_enabled=false
@@ -1349,10 +1355,10 @@
     [[[default]]]
       # Zookeeper ensemble. Comma separated list of Host/Port.
       # e.g. localhost:2181,localhost:2182,localhost:2183
-      ## host_ports=localhost:2181
+      host_ports=master02:2181
 
       # The URL of the REST contrib service (required for znode browsing).
-      ## rest_url=http://localhost:9998
+      rest_url=http://master02:9998
 
       # Name of Kerberos principal when using security.
       ## principal_name=zookeeper
