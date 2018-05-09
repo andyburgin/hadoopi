@@ -18,7 +18,7 @@
 
   # Set this to a random string, the longer the better.
   # This is used for secure hashing in the session store.
-  secret_key=<%= @hue_secretkey %>
+  secret_key=
 
   # Execute this script to produce the Django secret key. This will be used when
   # 'secret_key' is not set.
@@ -28,11 +28,20 @@
   http_host=0.0.0.0
   http_port=8888
 
+  # Choose whether to enable the new Hue 4 interface.
+  ## is_hue_4=true
+
+  # A comma-separated list of available Hue load balancers
+  ## hue_load_balancer=
+
   # Time zone name
-  time_zone=Europe/London
+  time_zone=America/Los_Angeles
 
   # Enable or disable Django debug mode.
   django_debug_mode=false
+
+  # Enable development mode, where notably static files are not cached.
+  ## dev=false
 
   # Enable or disable database debug mode.
   ## database_logging=false
@@ -60,7 +69,7 @@
   ## default_user=hue
 
   # This should be the hadoop cluster admin
-  default_hdfs_superuser=hduser
+  ## default_hdfs_superuser=hdfs
 
   # If set to false, runcpserver will not actually start the web server.
   # Used if Apache is being used as a WSGI container.
@@ -68,6 +77,9 @@
 
   # Number of threads used by the CherryPy web server
   ## cherrypy_server_threads=40
+
+  # This property specifies the maximum size of the receive buffer in bytes in thrift sasl communication (default 2 MB).
+  ## sasl_max_buffer=2 * 1024 * 1024
 
   # Filename of SSL Certificate
   ## ssl_certificate=
@@ -91,9 +103,9 @@
   ## secure_browser_xss_filter=true
 
   # X-Content-Type-Options: nosniff This is a HTTP response header feature that helps prevent attacks based on MIME-type confusion.
-  ## secure_content_security_policy="script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google-analytics.com *.doubleclick.net *.mathjax.org data:;img-src 'self' *.google-analytics.com *.doubleclick.net *.tile.osm.org data:;style-src 'self' 'unsafe-inline';connect-src 'self';child-src 'none';object-src 'none'"
+  ## secure_content_security_policy="script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google-analytics.com *.doubleclick.net data:;img-src 'self' *.google-analytics.com *.doubleclick.net http://*.tile.osm.org *.tile.osm.org *.gstatic.com data:;style-src 'self' 'unsafe-inline' fonts.googleapis.com;connect-src 'self';frame-src *;child-src 'self' data: *.vimeo.com;object-src 'none'"
 
-  # Strict-Transport-Security HTTP Strict Transport Security(HSTS) is a policy which is communicated by the server to the user agent via HTTP response header field name “Strict-Transport-Security”. HSTS policy specifies a period of time during which the user agent(browser) should only access the server in a secure fashion(https).
+  # Strict-Transport-Security HTTP Strict Transport Security(HSTS) is a policy which is communicated by the server to the user agent via HTTP response header field name "Strict-Transport-Security". HSTS policy specifies a period of time during which the user agent(browser) should only access the server in a secure fashion(https).
   ## secure_ssl_redirect=False
   ## secure_redirect_host=0.0.0.0
   ## secure_redirect_exempt=[]
@@ -106,7 +118,7 @@
   # https://wiki.mozilla.org/Security/Server_Side_TLS v3.7 intermediate
   # recommendation, which should be compatible with Firefox 1, Chrome 1, IE 7,
   # Opera 5 and Safari 1.
-  ## ssl_cipher_list=ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
+  ## ssl_cipher_list=ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS:!DH:!ADH
 
   # Path to default Certificate Authority certificates.
   ## ssl_cacerts=/etc/hue/cacerts.pem
@@ -139,7 +151,7 @@
   ## http_x_frame_options=SAMEORIGIN
 
   # Enable X-Forwarded-Host header if the load balancer requires it.
-  ## use_x_forwarded_host=false
+  ## use_x_forwarded_host=true
 
   # Support for HTTPS termination at the load-balancer level with SECURE_PROXY_SSL_HEADER.
   ## secure_proxy_ssl_header=false
@@ -156,10 +168,26 @@
   # Comma separated list of apps to not load at server startup.
   # e.g.: pig,zookeeper
   ## app_blacklist=
-  app_blacklist=impala
+
+  # Id of the cluster where Hue is located.
+  ## cluster_id='default'
 
   # Choose whether to show the new SQL editor.
   ## use_new_editor=true
+
+  # Global setting to allow or disable end user downloads in all Hue.
+  # e.g. Query result in Editors and Dashboards, file in File Browser...
+  ## enable_download=true
+
+  # Choose whether to enable SQL syntax check or not
+  ## enable_sql_syntax_check=true
+
+  # Choose whether to show the improved assist panel and the right context panel
+  ## use_new_side_panels=false
+
+  # Editor autocomplete timeout (ms) when fetching columns, fields, tables etc.
+  # To disable this type of autocompletion set the value to 0.
+  ## editor_autocomplete_timeout=30000
 
   # Enable saved default configurations for Hive, Impala, Spark, and Oozie.
   ## use_default_configuration=false
@@ -221,7 +249,7 @@
 
   # Comma separated list of strings representing the host/domain names that the Hue server can serve.
   # e.g.: localhost,domain1,*
-  ## allowed_hosts=*
+  ## allowed_hosts="*"
 
   # Administrators
   # ----------------
@@ -236,7 +264,7 @@
 
     # Top banner HTML code
     # e.g. <H4>Test Lab A2 Hue Services</H4>
-    ## banner_top_html=
+    ## banner_top_html='<div style="padding: 4px; text-align: center; background-color: #003F6C; color: #DBE8F1">This is Hue 4 Beta! - Please feel free to email any feedback / questions to <a href="mailto:team@gethue.com" target="_blank" style="color: #FFF; font-weight: bold">team@gethue.com</a> or <a href="https://twitter.com/gethue" target="_blank" style="color: #FFF; font-weight: bold">@gethue</a>.</div>'
 
     # Login splash HTML code
     # e.g. WARNING: You are required to have authorization before you proceed
@@ -245,6 +273,10 @@
     # Cache timeout in milliseconds for the assist, autocomplete, etc.
     # defaults to 86400000 (1 day), set to 0 to disable caching
     ## cacheable_ttl=86400000
+
+    # SVG code to replace the default Hue logo in the top bar and sign in screen
+    # e.g. <image xlink:href="/static/desktop/art/hue-logo-mini-white.png" x="0" y="0" height="40" width="160" />
+    ## logo_svg=
 
   # Configuration options for user authentication into the web application
   # ------------------------------------------------------------------------
@@ -314,8 +346,9 @@
     # After number of allowed login attempts are exceeded, do we lock out this IP and optionally user agent?
     ## login_lock_out_at_failure=false
 
-    # If set, defines period of inactivity in seconds after which failed logins will be forgotten
-    ## login_cooloff_time=60
+    # If set, defines period of inactivity in hours after which failed logins will be forgotten.
+    # A value of 0 or None will disable this check. Default: None
+    ## login_cooloff_time=None
 
     # If True, lock out based on an IP address AND a user agent.
     # This means requests from different user agents but from the same IP are treated differently.
@@ -494,6 +527,44 @@
           # The username attribute in the LDAP schema
           ## group_name_attr=cn
 
+  # Configuration options for specifying the Source Version Control.
+  # ----------------------------------------------------------------
+  [[vcs]]
+
+  ## [[[git-read-only]]]
+      ## Base URL to Remote Server
+      # remote_url=https://github.com/cloudera/hue/tree/master
+
+      ## Base URL to Version Control API
+      # api_url=https://api.github.com
+  ## [[[github]]]
+
+      ## Base URL to Remote Server
+      # remote_url=https://github.com/cloudera/hue/tree/master
+
+      ## Base URL to Version Control API
+      # api_url=https://api.github.com
+
+      # These will be necessary when you want to write back to the repository.
+      ## Client ID for Authorized Application
+      # client_id=
+
+      ## Client Secret for Authorized Application
+      # client_secret=
+  ## [[[svn]]
+      ## Base URL to Remote Server
+      # remote_url=https://github.com/cloudera/hue/tree/master
+
+      ## Base URL to Version Control API
+      # api_url=https://api.github.com
+
+      # These will be necessary when you want to write back to the repository.
+      ## Client ID for Authorized Application
+      # client_id=
+
+      ## Client Secret for Authorized Application
+      # client_secret=
+
   # Configuration options for specifying the Desktop Database. For more info,
   # see http://docs.djangoproject.com/en/1.4/ref/settings/#database-engine
   # ------------------------------------------------------------------------
@@ -510,30 +581,33 @@
     ## port=
     ## user=
     ## password=
+    # conn_max_age option to make database connection persistent value in seconds
+    # https://docs.djangoproject.com/en/1.9/ref/databases/#persistent-connections
+    ## conn_max_age=0
     # Execute this script to produce the database password. This will be used when 'password' is not set.
     ## password_script=/path/script
     ## name=desktop/desktop.db
     ## options={}
-    host=localhost
-    port=3306
-    engine=mysql
-    user=hue
-    password=huepassword
-    name=hue
+    # Database schema, to be used only when public schema is revoked in postgres
+    ## schema=public
 
   # Configuration options for specifying the Desktop session.
   # For more info, see https://docs.djangoproject.com/en/1.4/topics/http/sessions/
   # ------------------------------------------------------------------------
   [[session]]
+    # The name of the cookie to use for sessions.
+    # This can have any value that is not used by the other cookie names in your application.
+    ## cookie_name=sessionid
+
     # The cookie containing the users' session ID will expire after this amount of time in seconds.
     # Default is 2 weeks.
     ## ttl=1209600
 
-    # The cookie containing the users' session ID will be secure.
+    # The cookie containing the users' session ID and csrf cookie will be secure.
     # Should only be enabled with HTTPS.
     ## secure=false
 
-    # The cookie containing the users' session ID will use the HTTP only flag.
+    # The cookie containing the users' session ID and csrf cookie will use the HTTP only flag.
     ## http_only=true
 
     # Use session-length cookies. Logs out the user when she closes the browser window.
@@ -565,9 +639,15 @@
     ## hue_keytab=
     # Kerberos principal name for Hue
     ## hue_principal=hue/hostname.foo.com
+    # Frequency in seconds with which Hue will renew its keytab
+    ## keytab_reinit_frequency=3600
+    # Path to keep Kerberos credentials cached
+    ## ccache_path=/var/run/hue/hue_krb5_ccache
     # Path to kinit
     ## kinit_path=/path/to/kinit
 
+    # Mutual authentication from the server, attaches HTTP GSSAPI/Kerberos Authentication to the given Request object
+    ## mutual_authentication="OPTIONAL" or "REQUIRED" or "DISABLED"
 
   # Configuration options for using OAuthBackend (Core) login
   # ------------------------------------------------------------------------
@@ -610,31 +690,35 @@
   ## Show the notebook menu or not
   # show_notebooks=true
 
+  ## Flag to enable the selection of queries from files, saved queries into the editor or as snippet.
+  # enable_external_statements=true
+
   ## Flag to enable the bulk submission of queries as a background task through Oozie.
   # enable_batch_execute=true
+
+  ## Flag to turn on the SQL indexer.
+  # enable_sql_indexer=false
+
+  ## Flag to turn on the Presentation mode of the editor.
+  # enable_presentation=true
 
   ## Flag to enable the SQL query builder of the table assist.
   # enable_query_builder=true
 
   ## Flag to enable the creation of a coordinator for the current SQL query.
-  # enable_query_scheduling=true
+  # enable_query_scheduling=false
 
-  ## Flag to enable the Java document in editor and workflow.
-  # enable_java_document=true
+  ## Main flag to override the automatic starting of the DBProxy server.
+  # enable_dbproxy_server=true
 
-  ## Base URL to Remote GitHub Server
-  # github_remote_url=https://github.com
+  ## Classpath to be appended to the default DBProxy server classpath.
+  # dbproxy_extra_classpath=
 
-  ## Base URL to GitHub API
-  # github_api_url=https://api.github.com
+  ## Comma separated list of interpreters that should be shown on the wheel. This list takes precedence over the
+  ## order in which the interpreter entries appear. Only the first 5 interpreters will appear on the wheel.
+  # interpreters_shown_on_wheel=
 
-  ## Client ID for Authorized GitHub Application
-  # github_client_id=
-
-  ## Client Secret for Authorized GitHub Application
-  # github_client_secret=
-
-  # One entry for each type of snippet. The first 5 will appear in the wheel.
+  # One entry for each type of snippet.
   [[interpreters]]
     # Define the name and how to connect and execute the language.
 
@@ -672,10 +756,6 @@
       name=Spark Submit Python
       interface=livy-batch
 
-    [[[pig]]]
-      name=Pig
-      interface=pig
-
     [[[text]]]
       name=Text
       interface=text
@@ -706,8 +786,32 @@
       ## Name of the collection handler
       # options='{"collection": "default"}'
 
+    [[[pig]]]
+      name=Pig
+      interface=oozie
+
     [[[java]]]
       name=Java
+      interface=oozie
+
+    [[[spark2]]]
+      name=Spark
+      interface=oozie
+
+    [[[mapreduce]]]
+      name=MapReduce
+      interface=oozie
+
+    [[[sqoop1]]]
+      name=Sqoop1
+      interface=oozie
+
+    [[[distcp]]]
+      name=Distcp
+      interface=oozie
+
+    [[[shell]]]
+      name=Shell
       interface=oozie
 
     # [[[mysql]]]
@@ -718,8 +822,35 @@
     #   ## If 'user' and 'password' are omitted, they will be prompted in the UI.
     #   options='{"url": "jdbc:mysql://localhost:3306/hue", "driver": "com.mysql.jdbc.Driver", "user": "root", "password": "root"}'
 
-  ## Main flag to override the automatic starting of the DBProxy server.
-  # enable_dbproxy_server=true
+
+###########################################################################
+# Settings to configure your Analytics Dashboards
+###########################################################################
+
+[dashboard]
+
+  # Activate the Dashboard link in the menu.
+  ## is_enabled=true
+
+  # Activate the SQL Dashboard (beta).
+  ## has_sql_enabled=false
+
+  # Activate the Query Builder (beta).
+  ## has_query_builder_enabled=false
+
+  # Activate the static report layout (beta).
+  ## has_report_enabled=false
+
+  [[engines]]
+
+    #  [[[solr]]]
+    #  Requires Solr 6+
+    ##  analytics=false
+    ##  nesting=false
+
+    #  [[[sql]]]
+    ##  analytics=true
+    ##  nesting=false
 
 
 ###########################################################################
@@ -735,15 +866,15 @@
 
     [[[default]]]
       # Enter the filesystem uri
-      fs_defaultfs=hdfs://master01:54310
+      fs_defaultfs=hdfs://localhost:8020
 
       # NameNode logical name.
-      logical_name=hdfs://master01:54310
+      ## logical_name=
 
       # Use WebHdfs/HttpFs as the communication mechanism.
       # Domain should be the NameNode or HttpFs host.
       # Default port is 14000 for HttpFs.
-      webhdfs_url=http://master01:50070/webhdfs/v1
+      ## webhdfs_url=http://localhost:50070/webhdfs/v1
 
       # Change this if your HDFS cluster is Kerberos-secured
       ## security_enabled=false
@@ -753,7 +884,7 @@
       ## ssl_cert_ca_verify=True
 
       # Directory of the Hadoop configuration
-      hadoop_conf_dir=/opt/hadoop/etc/hadoop
+      ## hadoop_conf_dir=$HADOOP_CONF_DIR when set or '/etc/hadoop/conf'
 
   # Configuration for YARN (MR2)
   # ------------------------------------------------------------------------
@@ -761,10 +892,10 @@
 
     [[[default]]]
       # Enter the host on which you are running the ResourceManager
-      resourcemanager_host=master01
+      ## resourcemanager_host=localhost
 
       # The port where the ResourceManager IPC listens on
-      resourcemanager_port=8050
+      ## resourcemanager_port=8032
 
       # Whether to submit jobs to this cluster
       submit_to=True
@@ -776,16 +907,16 @@
       ## security_enabled=false
 
       # URL of the ResourceManager API
-      resourcemanager_api_url=http://master01:8088
+      ## resourcemanager_api_url=http://localhost:8088
 
       # URL of the ProxyServer API
       ## proxy_api_url=http://localhost:8088
 
       # URL of the HistoryServer API
-      history_server_api_url=http://master01:19888
+      ## history_server_api_url=http://localhost:19888
 
       # URL of the Spark History Server
-      spark_history_server_url=http://master02:18088
+      ## spark_history_server_url=http://localhost:18088
 
       # In secure mode (HTTPS), if SSL certificates from YARN Rest APIs
       # have to be verified against certificate authority
@@ -846,13 +977,13 @@
 
   # Host where HiveServer2 is running.
   # If Kerberos security is enabled, use fully-qualified domain name (FQDN).
-  hive_server_host=master01
+  ## hive_server_host=localhost
 
   # Port where HiveServer2 Thrift server runs on.
   ## hive_server_port=10000
 
   # Hive configuration directory, where hive-site.xml is located
-  hive_conf_dir=/opt/hive/conf
+  ## hive_conf_dir=/etc/hive/conf
 
   # Timeout in seconds for thrift calls to Hive service
   ## server_conn_timeout=120
@@ -867,14 +998,16 @@
   # The maximum number of partitions that will be included in the SELECT * LIMIT sample query for partitioned tables.
   ## query_partitions_limit=10
 
-  # A limit to the number of cells (rows * columns) that can be downloaded from a query
-  # (e.g. - 10K rows * 1K columns = 10M cells.)
+  # A limit to the number of rows that can be downloaded from a query before it is truncated.
   # A value of -1 means there will be no limit.
-  ## download_cell_limit=10000000
+  ## download_row_limit=100000
 
   # Hue will try to close the Hive query when the user leaves the editor page.
   # This will free all the query resources in HiveServer2, but also make its results inaccessible.
   ## close_queries=false
+
+  # Hue will use at most this many HiveServer2 sessions per user at a time.
+  ## max_number_of_sessions=1
 
   # Thrift version to use when communicating with HiveServer2.
   # New column format is from version 7.
@@ -894,6 +1027,15 @@
 
     # Choose whether Hue should validate certificates received from the server.
     ## validate=true
+
+
+###########################################################################
+# Settings to configure Metastore
+###########################################################################
+
+[metastore]
+  # Flag to turn on the new version of the create table wizard.
+  ## enable_new_create_table=true
 
 
 ###########################################################################
@@ -930,8 +1072,8 @@
   ## query_timeout_s=600
 
   # If > 0, the session will be timed out (i.e. cancelled) if Impala does not do any work
-  # (compute or send back results) for that session within QUERY_TIMEOUT_S seconds (default 12hours).
-  ## session_timeout_s=43200
+  # (compute or send back results) for that session within QUERY_TIMEOUT_S seconds (default 1 hour).
+  ## session_timeout_s=3600
 
   # Override the desktop default username and password of the hue user used for authentications with other services.
   # e.g. Used for LDAP/PAM pass-through authentication.
@@ -940,6 +1082,9 @@
 
   # A comma-separated list of white-listed Impala configuration properties that users are authorized to set.
   # config_whitelist=debug_action,explain_level,mem_limit,optimize_partition_key_scans,query_timeout_s,request_pool
+
+  # Path to the impala configuration dir which has impalad_flags file
+  ## impala_conf_dir=${HUE_CONF_DIR}/impala-conf
 
   [[ssl]]
     # SSL communication enabled for this server.
@@ -958,13 +1103,16 @@
 
 [spark]
   # Host address of the Livy Server.
-  livy_server_host=master02
+  ## livy_server_host=localhost
 
   # Port of the Livy Server.
   ## livy_server_port=8998
 
   # Configure Livy to start in local 'process' mode, or 'yarn' workers.
-  livy_server_session_kind=yarn
+  ## livy_server_session_kind=yarn
+
+  # Whether Livy requires client to perform Kerberos authentication.
+  ## security_enabled=false
 
   # Host of the Sql Server
   ## sql_server_host=localhost
@@ -985,13 +1133,23 @@
   ## sample_data_dir=...thirdparty/sample_data
 
   # Location on HDFS where the oozie examples and workflows are stored.
+  # Parameters are $TIME and $USER, e.g. /user/$USER/hue/workspaces/workflow-$TIME
   ## remote_data_dir=/user/hue/oozie/workspaces
 
   # Maximum of Oozie workflows or coodinators to retrieve in one API call.
-  ## oozie_jobs_count=50
+  ## oozie_jobs_count=100
 
   # Use Cron format for defining the frequency of a Coordinator instead of the old frequency number/unit.
   ## enable_cron_scheduling=true
+
+  # Flag to enable the saved Editor queries to be dragged and dropped into a workflow.
+  ## enable_document_action=true
+
+  # Flag to enable Oozie backend filtering instead of doing it at the page level in Javascript. Requires Oozie 4.3+.
+  ## enable_oozie_backend_filtering=true
+
+  # Flag to enable the Impala action.
+  ## enable_impala_action=false
 
 
 ###########################################################################
@@ -1007,6 +1165,9 @@
 
   # Show Upload Button for HDFS file browser.
   ## show_upload_button=false
+
+  # Flag to enable the extraction of a uploaded archive in HDFS.
+  ## enable_extract_uploaded_archive=true
 
 
 ###########################################################################
@@ -1030,7 +1191,6 @@
 
   # Sqoop server URL
   ## server_url=http://localhost:12000/sqoop
-  server_url=http://master01:12000/sqoop
 
   # Path to configuration directory
   ## sqoop_conf_dir=/etc/sqoop2/conf
@@ -1059,7 +1219,7 @@
   # Comma-separated list of HBase Thrift servers for clusters in the format of '(name|host:port)'.
   # Use full hostname with security.
   # If using Kerberos we assume GSSAPI SASL, not PLAIN.
-  hbase_clusters=(Cluster|master02:9090)
+  ## hbase_clusters=(Cluster|localhost:9090)
 
   # HBase configuration directory, where hbase-site.xml is located.
   ## hbase_conf_dir=/etc/hbase/conf
@@ -1081,16 +1241,12 @@
 
   # URL of the Solr Server
   ## solr_url=http://localhost:8983/solr/
-  solr_url=http://master02:8983/solr/
 
   # Requires FQDN in solr_url if enabled
   ## security_enabled=false
 
   ## Query sent when no term is entered
   ## empty_query=*:*
-
-  # Use latest Solr 5.2+ features.
-  ## latest=false
 
 
 ###########################################################################
@@ -1116,7 +1272,16 @@
   ## solrctl_path=/usr/bin/solrctl
 
   # Flag to turn on the morphline based Solr indexer.
-  ## enable_new_indexer=false
+  ## enable_new_indexer=true
+
+  # Oozie workspace template for indexing.
+  ## config_indexer_libs_path=/tmp/smart_indexer_lib
+
+  # Flag to turn on the new metadata importer.
+  ## enable_new_importer=false
+
+  # Flag to turn on sqoop.
+  ## enable_sqoop=false
 
 
 ###########################################################################
@@ -1147,6 +1312,16 @@
   # Offset in bytes where a negative offset will fetch the last N bytes for the given log file (default 1MB).
   ## log_offset=-1000000
 
+  # Maximum number of jobs to fetch and display when pagination is not supported for the type.
+  ## max_job_fetch=500
+
+  # Show the version 2 of app which unifies all the past browsers into one.
+  ## enable_v2=true
+
+  # Show the query section for listing and showing more troubleshooting information.
+  ## enable_query_browser=false
+
+
 ###########################################################################
 # Settings to configure Sentry / Security App.
 ###########################################################################
@@ -1175,11 +1350,9 @@
       # Zookeeper ensemble. Comma separated list of Host/Port.
       # e.g. localhost:2181,localhost:2182,localhost:2183
       ## host_ports=localhost:2181
-      host_ports=master02:2181
 
       # The URL of the REST contrib service (required for znode browsing).
       ## rest_url=http://localhost:9998
-      rest_url=http://master02:9998
 
       # Name of Kerberos principal when using security.
       ## principal_name=zookeeper
@@ -1229,18 +1402,65 @@
 [aws]
   [[aws_accounts]]
     # Default AWS account
-    [[[default]]]
+    ## [[[default]]]
       # AWS credentials
       ## access_key_id=
       ## secret_access_key=
+      ## security_token=
+
+      # Execute this script to produce the AWS access key ID.
+      ## access_key_id_script=/path/access_key_id.sh
+
+      # Execute this script to produce the AWS secret access key.
+      ## secret_access_key_script=/path/secret_access_key.sh
 
       # Allow to use either environment variables or
       # EC2 InstanceProfile to retrieve AWS credentials.
       ## allow_environment_credentials=yes
 
-      # AWS region to use
+      # AWS region to use, if no region is specified, will attempt to connect to standard s3.amazonaws.com endpoint
       ## region=us-east-1
 
+      # Endpoint overrides
+      ## host=
+
+      # Proxy address and port
+      ## proxy_address=
+      ## proxy_port=8080
+      ## proxy_user=
+      ## proxy_pass=
+
+      # Secure connections are the default, but this can be explicitly overridden:
+      ## is_secure=true
+
+      # The default calling format uses https://<bucket-name>.s3.amazonaws.com but
+      # this may not make sense if DNS is not configured in this way for custom endpoints.
+      # e.g. Use boto.s3.connection.OrdinaryCallingFormat for https://s3.amazonaws.com/<bucket-name>
+      ## calling_format=boto.s3.connection.OrdinaryCallingFormat
+
+###########################################################################
+# Settings for the Azure lib
+###########################################################################
+[azure]
+  [[azure_accounts]]
+    # Default Azure account
+    [[[default]]]
+      # Azure credentials
+      ## client_id=
+      ## client_secret=
+      ## refresh_url=https://login.microsoftonline.com/<tenant_id>/oauth2/token
+
+      # Endpoint overrides
+      ## proxy_address=
+      ## proxy_port=8080
+      ## proxy_user=
+      ## proxy_pass=
+
+  [[adls_clusters]]
+    # Default ADLS cluster
+    [[[default]]]
+      # fs_defaultfs=adl://<account_name>.azuredatalakestore.net
+      # webhdfs_url=https://<account_name>.azuredatalakestore.net/webhdfs/v1
 
 ###########################################################################
 # Settings for the Sentry lib
@@ -1255,6 +1475,9 @@
 
   # Sentry configuration directory, where sentry-site.xml is located.
   ## sentry_conf_dir=/etc/sentry/conf
+
+  # Number of seconds when the privilege list of a user is cached.
+  ## privilege_checker_caching=30
 
 
 ###########################################################################
@@ -1472,36 +1695,74 @@
 ###########################################################################
 
 [metadata]
-  # For metadata tagging and enhancement features
 
   [[optimizer]]
-    # For SQL query and table analysis
-    # Base URL to Optimizer API.
-    ## api_url=https://alpha.optimizer.cloudera.com
-    # The name of the product or group which will have API access to the emails associated with it.
-    ## product_name=hue
-    # A secret passphrase associated with the productName
-    ## product_secret=hue
-    # Execute this script to produce the product secret. This will be used when 'product_secret' is not set.
-    ## product_secret_script=
+    # Hostname to Optimizer API or compatible service.
+    ## hostname=navoptapi.us-west-1.optimizer.altus.cloudera.com
 
-    # The email of the Optimizer account you want to associate with the Product.
-    ## email=hue@gethue.com
-    # The password associated with the Optimizer account you to associate with the Product.
-    ## email_password=hue
-    # Execute this script to produce the email password. This will be used when 'email_password' is not set.
-    ## password_script=
+    # The name of the key of the service.
+    ## auth_key_id=e0819f3a-1e6f-4904-be69-5b704bacd1245
 
-    # In secure mode (HTTPS), if Optimizer SSL certificates have to be verified against certificate authority.
-    ## ssl_cert_ca_verify=True
+    # The private part of the key associated with the auth_key.
+    ## auth_key_secret='-----BEGIN PRIVATE KEY....'
+
+    # Execute this script to produce the auth_key secret. This will be used when `auth_key_secret` is not set.
+    ## auth_key_secret_script=/path/to/script.sh
+
+    # The name of the workload where queries are uploaded and optimizations are calculated from. Automatically guessed from auth_key and cluster_id if not specified.
+    ## tenant_id=
+
+    # Perform Sentry privilege filtering.
+    # Default to true automatically if the cluster is secure.
+    ## apply_sentry_permissions=False
+
+    # Cache timeout in milliseconds for the Optimizer metadata used in assist, autocomplete, etc.
+    # Defaults to 1 week, set to 0 to disable caching.
+    ## cacheable_ttl=604800000
+
+    # Automatically upload queries after their execution in order to improve recommendations.
+    ## auto_upload_queries=true
+
+    # Allow admins to upload the last N executed queries in the quick start wizard. Use 0 to disable.
+    ## query_history_upload_limit=10000
 
   [[navigator]]
-    # For tagging tables, files and getting lineage of data.
-    # Navigator API URL (without version suffix)
+    # Navigator API URL (without version suffix).
     ## api_url=http://localhost:7187/api
 
-    # Navigator API HTTP authentication username and password
-    # Override the desktop default username and password of the hue user used for authentications with other services.
-    # e.g. Used for LDAP/PAM pass-through authentication.
-    ## auth_username=hue
-    ## auth_password=
+    # Which authentication to use: CM or external via LDAP or SAML.
+    ## navmetadataserver_auth_type=CMDB
+
+    # Username of the CM user used for authentication.
+    ## navmetadataserver_cmdb_user=hue
+    # CM password of the user used for authentication.
+    ## navmetadataserver_cmdb_password=
+    # Execute this script to produce the CM password. This will be used when the plain password is not set.
+    # navmetadataserver_cmdb_password_script=
+
+    # Username of the LDAP user used for authentication.
+    ## navmetadataserver_ldap_user=hue
+    # LDAP password of the user used for authentication.
+    ## navmetadataserver_ldap_ppassword=
+    # Execute this script to produce the LDAP password. This will be used when the plain password is not set.
+    ## navmetadataserver_ldap_password_script=
+
+    # Username of the SAML user used for authentication.
+    ## navmetadataserver_saml_user=hue
+    ## SAML password of the user used for authentication.
+    # navmetadataserver_saml_password=
+    # Execute this script to produce the SAML password. This will be used when the plain password  is not set.
+    ## navmetadataserver_saml_password_script=
+
+    # Perform Sentry privilege filtering.
+    # Default to true automatically if the cluster is secure.
+    ## apply_sentry_permissions=False
+
+    # Max number of items to fetch in one call in object search.
+    ## fetch_size_search=450
+
+    # Max number of items to fetch in one call in object search autocomplete.
+    ## fetch_size_search_interactive=450
+
+    # If metadata search is enabled, also show the search box in the left assist.
+    ## enable_file_search=false
