@@ -1,7 +1,10 @@
-#hue
-default['hue']['secretkey']="qpbdxoewsqlkhztybvfidtvwekftusgdlofbcfghaswuicmqp"
+#general
 default['hadoop']['maxmem']=512
 default['hadoop']['repobase']="http://192.168.2.50:8000/"
+default['swapsize']=512
+
+#hue
+default['hue']['secretkey']="qpbdxoewsqlkhztybvfidtvwekftusgdlofbcfghaswuicmqp"
 
 #versions
 default['hadoop']['version'] = '2.6.4'
