@@ -3,7 +3,13 @@
 		"recipe[hadoopi::user]",
 		"recipe[hadoopi::hadoop-install]",
 		"recipe[hadoopi::hadoop-hdfs]",
-		"recipe[hadoopi::hadoop-hue]"
+                "recipe[hadoopi::hadoop-hue]",
+                "recipe[hadoopi::hadoop-hive]",
+                "recipe[hadoopi::hadoop-pig]",
+                "recipe[hadoopi::hadoop-oozie]",
+                "recipe[hadoopi::hadoop-sqoop]",
+                "recipe[hadoopi::hadoop-solr-hdfs]",
+                "recipe[hadoopi::hadoop-spark-hdfs]"
 	],
 
         "node": {

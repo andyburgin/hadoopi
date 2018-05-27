@@ -1,5 +1,6 @@
 {
         "run_list": [
+		"recipe[hadoopi::swap]",
 		"recipe[hadoopi::network]"
 	],
 
