@@ -15,6 +15,13 @@ execute "create prometheus symlink" do
         user "root"
 end
 
+template "/opt/prometheus/prometheus.yml" do
+        source "prometheus.yml.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
+
 # no systemd_unit resource till chef 12.11, fall back to template and systemctl 
 template "/etc/systemd/system/prometheus.service" do
         source "prometheus.service.erb"
@@ -24,7 +31,7 @@ template "/etc/systemd/system/prometheus.service" do
 end
 
 execute "enable and start prometheus" do
-        command "systemctl daemon-reload && systemctl enable prometheus && systemctl start prometheus"
+        command "systemctl daemon-reload && systemctl enable prometheus && systemctl restart prometheus"
         user "root"
 end
 
