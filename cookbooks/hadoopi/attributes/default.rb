@@ -20,6 +20,7 @@ default['oozie']['version'] = '4.3.0'
 default['sqoop']['version'] = '1.99.4'
 default['sqoopmysql']['version'] = '5.1.40'
 default['solr']['version'] = '4.10.4'
+default['prometheus']['version'] = '2.2.1'
 
 #networking
 default['hosts'] =  {
