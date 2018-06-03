@@ -22,6 +22,7 @@ default['sqoopmysql']['version'] = '5.1.40'
 default['solr']['version'] = '4.10.4'
 default['prometheus']['version'] = '2.2.1'
 default['nodeexporter']['version'] = '0.15.2'
+default['processexporter']['version'] = '0.1.0'
 
 #networking
 default['hosts'] =  {

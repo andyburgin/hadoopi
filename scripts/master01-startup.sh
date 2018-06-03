@@ -30,3 +30,5 @@ su oozie - -c "cd /opt/oozie && bin/oozied.sh start"
 echo "Start Sqoop"
 su hduser - -c "cd /opt/sqoop/ && /opt/sqoop/bin/sqoop.sh server start"
 
+echo "Start Process Exporter"
+/opt/process-exporter/process-exporter -config.path /opt/process-exporter/conf/config.yml > /opt/process-exporter/logs/process-exporter.out 2> /opt/process-exporter/logs/process-exporter.err &
