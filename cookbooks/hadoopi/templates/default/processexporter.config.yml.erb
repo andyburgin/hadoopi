@@ -1,0 +1,30 @@
+process_names:
+
+  - name: huesupervisor
+    cmdline:
+    - supervisor
+
+  - name: hueserver
+    cmdline:
+    - runcherrypyserver
+
+  - name: sqoop
+    cmdline:
+    - Dsqoop
+
+  - name: oozie
+    cmdline:
+    - Doozie
+
+  - name: hiverserver2
+    cmdline:
+    - HiveServer2
+
+  - name: livy
+    cmdline:
+    - com\.cloudera\.livy\.server\.LivyServer
+
+  - name: solr
+    cmdline:
+    - Dsolr
+

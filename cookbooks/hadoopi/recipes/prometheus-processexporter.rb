@@ -19,3 +19,13 @@ directory '/opt/process-exporter/logs' do
   action :create
 end
 
+directory '/opt/process-exporter/conf' do
+  action :create
+end
+
+template "/opt/process-exporter/conf/config.yml" do
+        source "processexporter.config.yml.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
