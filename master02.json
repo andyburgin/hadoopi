@@ -6,7 +6,10 @@
 		"recipe[hadoopi::hadoop-install]",
 		"recipe[hadoopi::hadoop-hbase]",
 		"recipe[hadoopi::hadoop-spark]",
-		"recipe[hadoopi::hadoop-solr]"
+		"recipe[hadoopi::hadoop-solr]",
+                "recipe[hadoopi::prometheus-server]",
+                "recipe[hadoopi::prometheus-processexporter]",
+                "recipe[hadoopi::prometheus-nodeexporter]"
 	],
 
 	"node": {
