@@ -1,5 +1,6 @@
 {
     "run_list": [
+		"recipe[hadoopi::swap]",
 		"recipe[hadoopi::network]",
 		"recipe[hadoopi::user]",
 		"recipe[hadoopi::hadoop-install]",
@@ -10,6 +11,6 @@
 
 	"node": {
 		"hostname": "master02",
-		"ip_address": "10.0.0.12"
+		"ip_address": "192.168.2.22"
 	}
 }

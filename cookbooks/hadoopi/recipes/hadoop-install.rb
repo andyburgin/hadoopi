@@ -26,7 +26,7 @@ execute "create hadoop symlink" do
 	user "root"
 end
 
-execute "change hadoop file permissions" do
+execute "change hadoop file permissions for symlink" do
 	command "chown -R hduser:hadoop /opt/hadoop"
 	user "root"
 end	

@@ -13,7 +13,7 @@ execute "create hbase symlink" do
         user "root"
 end
 
-execute "change hbase file permissions" do
+execute "change hbase symlink file permissions" do
         command "chown -R hduser:hadoop /opt/hbase"
         user "root"
 end

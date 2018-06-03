@@ -40,7 +40,7 @@ slaac private
 # server, but it should not be run by default.
 nohook lookup-hostname
 
-interface wlan0
+interface eth0
 static ip_address=<%= @node_ip_address %>/24
 static routers=<%= @gateway %>
 static domain_name_servers=<%= @gateway %>

@@ -1,0 +1,11 @@
+{
+        "run_list": [
+		"recipe[hadoopi::swap]",
+		"recipe[hadoopi::network]"
+	],
+
+        "node": {
+                "hostname": "master01",
+                "ip_address": "192.168.2.21"
+	}
+}

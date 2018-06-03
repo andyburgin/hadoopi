@@ -2,9 +2,14 @@
 
 This project contains the configuration files and chef code to configure a cluster of five Raspberry Pi 3s as a working Hadoop running Hue.
 
-This video shows how to set up and configure the cluster using this code.
+This video shows how to set up and configure the cluster using this code, however this is using the "1.0" tag which is configured to use wifi based networking.
 
 [![Alt text](https://img.youtube.com/vi/YtI9LkIJ7Hc/0.jpg)](https://www.youtube.com/watch?v=YtI9LkIJ7Hc)
+
+This has now been changed and uses wired networking to add improvements for speed and reliability of network connectivity.
+
+![Cluster with wired network](doc/images/cluster-wired-network.jpg)
+
 
 The versions of installed Hadoop components are:
 
@@ -21,7 +26,7 @@ The versions of installed Hadoop components are:
 * impala - not supported
 
 ## Inspiration
-Running Hadoop on Rasberry Pis is not a new idea, a lot of work has been done by individuals and I wanted to make sure their efforts were recognised. Their work and formed the basis of my attempts and inspired me to start the project.
+Running Hadoop on Rasberry Pis is not a new idea, a lot of work has been done by individuals and I wanted to make sure their efforts were recognised. Their work has formed the basis of my attempts and inspired me to start the project.
 
 *	Jamie Whitehorn - https://www.youtube.com/watch?v=n6ONKshWSMg
 * Jonas Widrikson - http://www.widriksson.com/raspberry-pi-2-hadoop-2-cluster/
@@ -30,19 +35,19 @@ Running Hadoop on Rasberry Pis is not a new idea, a lot of work has been done by
 * DQYDJ - https://dqydj.com/raspberry-pi-hadoop-cluster-apache-spark-yarn/
 
 ## Objectives
-###	Learn
-My day job uses the Cloudera distribution of Hadoop, which provides a great management interface, but that means I'm somewhat shielded from the inner workings of Hadoop configuration and tooling. I decided to put this distribution together to see if was feasible/practical to run Hadoop on a cluster of Raspberry Pis, but also to get more exposure to it's tooling and configuration. At the same time I wanted a feature rich and easy to use "suite" of tools so I based the project around Hue. I also wanted it to be easily recreateable so used Chef.
+###	Learning
+My day job uses the Cloudera distribution of Hadoop, which provides a great management interface, but that means I'm somewhat shielded from the inner workings of Hadoop configuration and tooling. I decided to put this distribution together to see if was feasible/practical to run Hadoop on a cluster of Raspberry Pis, but also to get more exposure to it's tooling and configuration. At the same time I wanted a feature rich and easy to use "suite" of tools so I based the project around Hue. I also wanted it to be easily recreateable so used Chef as a way to provision the nodes.
 
 ###	Caveats
 There are some caveates to bear in mind when using this tool.
 
-* No Impala - don't think the Pi has enough power whilst running other Hadoop components - happy to receive pull requests :-)
-* No Sentry - access to the data on the cluster will be based around HDFS security  
+* No Impala - IMHO I don't think the Pi has enough power whilst running other Hadoop components - happy to receive pull requests :-)
+* No Sentry - access to the data on the cluster will be based around HDFS security.
 * Not a production reference - it's a learning exercise, given the performance of the cluster you really wouldn't want to run anything "real" on there.
-* Teeny amount of memory so only basic stuff - The 1GB of ram on the Pi is a real limitation, you're really only going to be able to one task at a time, so go easy on it
-* Its slowwwwwwwww - the combination of teeny amount of RAM, 4 cores and wifi networking means this is built for speed, be realistic with your expectations!
-* Setup requires basic linux command line fu and understanding of network configuration - you are going to be compiling applications, running chef code and possibly doing a little fault finding, you'll need some basic linux sysadmin skills for this.
-* It's compiles and configures correctly as of NOW - there are loads of dependencies on 3rd party libraries and packages, both when compiling binaries or configuring the cluster, but things get move, deleted or just change, you'll need be able to diagnose problems and change settings.
+* Teeny amount of memory so only basic stuff - The 1GB of ram on the Pi is a real limitation, you're really only going to be able to one task at a time, so go easy on it.
+* Its slowwwwwwwww - the combination of teeny amount of RAM and only 4 cores means this is not built for speed, be realistic with your expectations!
+* Setup requires basic linux command line fu and understanding of network configuration - you are going to be compiling applications, running chef code and possibly doing a little fault finding, you'll need some moderate linux sysadmin skills for this.
+* It's compiles and configures correctly as of NOW - there are loads of dependencies on 3rd party libraries and packages, both when compiling binaries or configuring the cluster, but things get move, deleted or just change, you'll need to be able to diagnose problems and change settings.
 * Ask if you want help - github issues are ideal but please be clear in what attempts you have made to diagnose and fix.
 
 ## The hardware
@@ -51,26 +56,35 @@ To build the cluster you are going to need:
 * 5 x Raspberry Pi 3s
 * Nylon Spacers to stack the Pis
 * Acrylic Raspberry Pi case for base and lid to keep the dust off
-* Wireless Router - I'm using a TP-Link tl-wr802n travel router
+* Network switch, I use a USB powered 8 port Edimax ES-5800G
+* Network cables
 * Anker 60w 6 usb port hub
 * 6 usb cables
 * 5 x Samsung Evo+64GB micro sd cards
 * Computer for administering via ssh, running a webserver and a web browser to access Hue
 
-Just a quick note on the micro sd cards, perfromance of cards can vary wildly, I was recommended the Evo+ cards as their performance at reading and writing small files was very good, you can check the performance of yours using  https://github.com/geerlingguy/raspberry-pi-dramble/blob/master/setup/benchmarks/microsd-benchmarks.sh
+Just a quick note on the micro sd cards, perfromance of cards can vary wildly, I was recommended the Evo+ cards as their performance at reading and writing small files is very good, you can check the performance of yours using  https://github.com/geerlingguy/raspberry-pi-dramble/blob/master/setup/benchmarks/microsd-benchmarks.sh
 
 
 ## Making Binaries
 Although most of hadoop eco system is written in java and available in binary format, there are some components that need to be built for the target architecture for performance. As the Raspberry Pi is ARM based we simply can't take the precompiled binaries and run them, we're going to have to compile those. These are Hadoop (with the correct version of protobuf libraries that we will also need to build), Oozie and Hue.
 
-Install the Rasbian Jessie Lite version dated 23/09/16 onto you sd card, the development of the project was based around this version.
+Install the Rasbian Jessie Lite version dated 05/07/17 onto you sd card, the development of the project was based around this version.
 
-    http://downloads.raspberrypi.org/raspbian/images/raspbian-2016-09-28/
+    http://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-07-05/
 
-This version has a few "features" that are really useful, firstly it will auto expand the file system on first boot, secondly the SSH server is enabled by default (which is probably an error) but it means we can configure the Pi headless without the need of doing basic service config without the fuss of connecting a keyboard and monitor.
+This version is the latest of the Jessie distribution, I have tried using stretch but hit several problems compiling binaries, so I'm sticking with this version of Jessie. When you write the image to your SD card remember to enable the ssh server by creating an empty file called "ssh" in the boot partition e.g.
+
+	sudo touch /path-to-where-your-sd-card-is-mounted/boot/ssh
+
+replacing the path accordingly.
 
 ### Compile protobuf
-Locate you Pi's ip address (via some form of network scan, or go through the fuss of connect a monitor and keyboard) then ssh to it as the pi user. then download and unpack the protobuf v2.5 source, tweak the build script so that it refers to the new location of the google test suite and build and install the libraries:
+Boot the pi and locate you it's ip address via some form of network scan e.g.
+
+	nmap -sP 192.168.2.0/24 | grep rasp
+	
+and ssh to it as the pi user. then download and unpack the protobuf v2.5 source, tweak the build script so that it refers to the new location of the google test suite and build and install the libraries:
 
 	sudo -i
 	apt-get update
@@ -159,7 +173,7 @@ Download the patch to fix the example loading issues with 3.11.0, patch the desk
 	wget https://github.com/cloudera/hue/commit/b059cec5c55737af3ceeb3a8cb2c0ce4e4d94b4d.patch
 	patch < b059cec5c55737af3ceeb3a8cb2c0ce4e4d94b4d.patch
 
-Change the driverMemory and executorMemory defaults from 1GB to 256MB in desktop/libs/notebook/src/notebook/connectors/spark_shell.py
+Next using your favourite editor change the driverMemory and executorMemory defaults from 1GB to 256MB in desktop/libs/notebook/src/notebook/connectors/spark_shell.py
 
 Then build the apps
 
@@ -220,28 +234,39 @@ master02
 * Solr
 
 ### Networking
-The cluster is setup to run on the 10.0.0.x network range:
+The cluster is setup to run on the 192.168.2.x network range:
 
-* 10.0.0.11 - master01
-* 10.0.0.12 - master02
-* 10.0.0.21 - worker01
-* 10.0.0.22 - worker02
-* 10.0.0.23 - worker03
-* 10.0.0.9  - administering computer running python webserver
-
-The TP-Link router is setup in "WISP Client" mode so it bridges the two wifi networks from 10.0.0.x to 192.168.2.x that way I can set the cluster up so it has outbound internet connectivity from the 10.0.0.x network on via my 192.168.2.x network. The great advantage with this setup is the cluster and router can taken away from my 192.168.2.x network and use the cluster without having to reconfigure the network.
+* 192.168.2.21 - master01
+* 192.168.2.22 - master02
+* 192.168.2.31 - worker01
+* 192.168.2.32 - worker02
+* 192.168.2.33 - worker03
+* 192.168.2.50 - administering computer running python webserver
 
 You can modify the network configuration by modifying the chef attributes or refactoring the network recipe. You may also want to add the nodes to your administering computer /etc/hosts file.
 
-### Installing
-Firstly write the Jessie Lite version dated 23/09/16 onto your sd cards. We will setup the Pis in turn, worker01-03 and then master02, for the final step when we setup master01 which will need all the Pi's powered on as it modifies files on the HDFS file system. This means you'll only need on pi connected to ethernet.
+Note: the 3.11 branch still contains the original configuration for wifi networking should you want to run your cluster over wifi.
 
-So insert the first sd card into one of your Pis, connect the ethernet cable and power it up, wait a minute whilst the Pi boots and  SSH into the pi, you can determine the ip address of your pi by either using a network scanner or by connecting a monitor to the hdmi port.
+### Installing
+Firstly write the Jessie Lite version dated 05/07/17 onto your sd cards, remember to enable the ssh server byc reating an empty file called "ssh" in the boot partition e.g.
+
+	sudo touch /path-to-where-your-sd-card-is-mounted/boot/ssh
+
+replacing the path accordingly.
+
+We will setup the Pis in turn, worker01-03 and then master02, for the final step when we setup master01 which will need all the Pi's powered on as it modifies files on the HDFS file system by starting the cluster. 
+
+Insert the first sd card into one of your Pis, connect the ethernet cable and power it up, wait a minute whilst the Pi boots and SSH into the pi, you can determine the ip address of your pi by either using a network scanner e.g.
+
+	nmap -sP 192.168.2.0/24 | grep rasp
+
+alternatively you could connect the pi to the hdmi and keyboard and work directly on it.
 
 Once we have ssh'ed into the Pi we need to update the system:
 
     sudo -i
     apt-get update
+	apt-get -y upgrade
 
 Installed git and chef:
 
@@ -251,11 +276,6 @@ Clone the code from github to the Pi:
 
     git clone https://github.com/andyburgin/hadoopi.git
     cd hadoopi
-
-Set your wifi SSID and password as environment variables:
-
-    export WIRESSID=myssid
-    export WIREPASS=mypassword
 
 Then run chef against the worker01.json file
 
@@ -269,13 +289,15 @@ Wait for it to finish and:
 
 For the setup of master01 place the final sd card in the pi with the ethernet connection, setup the remaining 4 pis with the previously configured sd cards and power up all of the pis. As before ssh into the Pi you are configuring, update the system, install git & chef, clone the code, set you network SSID & password, then run:
 
+    chef-solo -c solo.rb -j master01-presetup.json
+
+then reboot the pi for new network setting to take effect
+
+Next we need an extra chef run to install additional Hadoop components and configure files on the HDFS filesystem that runs across the cluster:
+
     chef-solo -c solo.rb -j master01.json
 
-Then we need an extra chef run to install additional Hadoop components and configure files on the HDFS filesystem that runs across the cluster:
-
-    chef-solo -c solo.rb -j master01-services.json
-
-Then ssh into all of the nodes (via their 10.0.0.x ip addresses):
+Finally ssh into all of the nodes (via their 192.168.2.x ip addresses):
 
     poweroff
 
@@ -291,7 +313,7 @@ As a one off exercise before we start the cluster lets install some test data in
     mysql -u root -e "FLUSH PRIVILEGES;"
 
 #### Starting the Cluster
-On master01 and master02 you will find some scripts in the /root/hadoopi/scripts folder. After powering on the cluster (you no longer need the ethernet connection as all nodes will connect to the wifi connection) start the cluster on master01 by issuing:
+On master01 and master02 you will find some scripts in the /root/hadoopi/scripts folder. After powering on the cluster start the the hadoop services on master01 by issuing:
 
     sudo -i
     cd  ~/hadoopi/scripts
@@ -306,13 +328,13 @@ Then on master02 run:
 Once those scripts have sucessfully run you are now ready to configure Hue.
 
 #### Configuring Hue
-We access hue via a web browser, point you we bbrowser your web browser at:
+We access hue via a web browser, point your web browser at:
 
     http://master01:8888/
 
-The first time you hit the url you'll be asked to create a Hue administrator user, the cluster is configured to work withe the "hduser" user, so make sure you use that with a password of your choice.
+The first time you hit the url you'll be asked to create a Hue administrator user, the cluster is configured to work with the "hduser" user, so make sure you use that with a password of your choice.
 
-From the "Quick Start Wizard" select the "examples" tab and one by one install each of the examples. Frome the "Data Browser" menu take a look at the "Metastore Tables" to check Hive data is available and the "HBase" option to view the data there. Finally select one of the Dashboards under the "Search" menu to heck the Solr indexes are available.
+From the "Quick Start Wizard" select the "examples" tab and one by one install each of the examples (don't start them all at once). Frome the "Data Browser" menu take a look at the "Metastore Tables" to check Hive data is available and the "HBase" option to view the data there. Finally select one of the Dashboards under the "Search" menu to check the Solr indexes are available.
 
 #### Stopping the Cluster
 Powering down the cluster is as easy as starting it, on master01 run:
@@ -326,16 +348,15 @@ Then on master02 run:
     sudo -i
     cd  ~/hadoopi/scripts
     ./master02-stop.sh
-    poweroff
 
-Finally on each of the worker nodes run:
+Finally on each of the nodes run:
 
     sudo poweroff
 
 From now on you can simply power on the cluster and run the startup scripts on master01 and master02 as root. Once you have finished using the cluster shut it down by running the stop script on master01 and master02, then running the "poweroff" command on each of the 5 nodes as root.
 
 ## Hue Examples
-I won't go through every example using installed in hue, watching the vide will convey far more, but I'll cover some of the key ones and allow you to explore. Please remember the Raspberry Pi has a teeny amount of memory and runs things very slowly, be patient and don't submit more than one job at once, doing so will more than likely cause your jobs to fail.
+I won't go through every example installed in hue, watching the video will convey far more, but I'll cover some of the key ones and allow you to explore. Please remember the Raspberry Pi has a teeny amount of memory and runs things very slowly, be patient and don't submit more than one job at once, doing so will more than likely cause your jobs to fail.
 
 ### Hive Examples
 From the "Query Editor" menu select "Hive", in the resulting query window select one of the example scripts e.g. "Sample Salary Growth" and hit the "play" button to submit the query.
@@ -359,14 +380,14 @@ Click the play button to submit the query, you'll be prompted to specify an outp
 
 ![Pig Query](doc/images/pig-query.jpg)
 
-Go to the job browser and wait for the two generated jobs to finish, then click the "HDFS Browser" icon and navigate to /tmp/pigout and view on e of the "part-m-????" file and see the generated text.
+Go to the job browser and wait for the two generated jobs to finish, then click the "HDFS Browser" icon and navigate to /tmp/pigout and view one of the "part-m-????" files to see the generated uppercase text.
 
 ![Pig Results](doc/images/pig-results.jpg)
 
 ### Spark Notebooks
 Spark notebooks are one of the best features of Hue, allowing you to edit code directly in the browser and run it via spark on the cluster. We'll try out the three supported languages Python, Scala and R (we don't have Impala support).
 
-Select "Notebooks" menu and open the "Sample Notebook", we'll need to start a session for each language, we'll try Python first so click the "context" icon to open the context menu and then choose "Recreate" next to the PySpark option, this creates a Spark job viewable via the job browser.
+Select "Notebooks" menu and open the "Sample Notebook", we'll need to start a session for each language (one at a time, not all at once), we'll try Python first so click the "context" icon to open the context menu and then choose "Recreate" next to the PySpark option, this creates a Spark job viewable via the job browser.
 
 ![PySpark Session](doc/images/spark-pyspark-session.jpg)
 
@@ -385,7 +406,9 @@ Skip over the Impala examples as they aren't supported.
 Start the R session by clicking "create" next to the option and when the job/session have started edit the path in the R sample to
     /tmp/web_logs_1.csv
 The R example doesn't used HDFS so you'll need to SSH onto each worker and run:
+
     curl https://raw.githubusercontent.com/cloudera/hue/master/apps/beeswax/data/web_logs_1.csv -o /tmp/web_logs_1.csv
+
 Back on the Notebook click the play icon next to the code and examine the output including plot.
 
 ![R Session](doc/images/spark-r-session.jpg)
@@ -449,7 +472,7 @@ Start the job by clicking "Save and run", navigate to the job browser and wait f
 ![Sqoop Results](doc/images/sqoop-results.jpg)
 
 ### Ozzie Examples
-There are many Ozzie examples installed, so I'll only talk about a few of them here. Lets firstly run the Shell example. Select "Query Editors" from the menu  and the "Job Designer", next click the "Shell" example, you'll be presented with the job editor. I for scroll down you'll see a parameter to the "hello.py" command is "World!".
+There are many Ozzie examples installed, so I'll only talk about a few of them here. Lets firstly run the Shell example. Select "Query Editors" from the menu and the "Job Designer", next click the "Shell" example, you'll be presented with the job editor. I for scroll down you'll see a parameter to the "hello.py" command is "World!".
 
 ![Oozie Shell](doc/images/oozie-shell.jpg)
 
@@ -457,7 +480,7 @@ Click the "Submit" button (then confirm) and you'll be presented with the workfl
 
 ![Oozie Shell](doc/images/oozie-log.jpg)
 
-Next let's look at amore complicated workflow, from the menu select "Workflows" -> "Editors" -> "Workflows", on the resulting page select "Spark" and you'll be presented with the job configuration page, for the spark workflow to run we will need to configure the settings for spark, click the "pen" icon to edit the job, next click the "cogs" icon on the spark step to access the steps properties. In the "Options List" filed enter:
+Next let's look at a more complicated workflow, from the menu select "Workflows" -> "Editors" -> "Workflows", on the resulting page select "Spark" and you'll be presented with the job configuration page, for the spark workflow to run we will need to configure the settings for spark, click the "pen" icon to edit the job, next click the "cogs" icon on the spark step to access the steps properties. In the "Options List" filed enter:
 
     --conf spark.testing.reservedMemory="64000000" --conf spark.testing.memory="128000000" --executor-memory 256m --driver-memory 256m --num-executors 1
 
@@ -482,4 +505,4 @@ You'll see each present a variety of charts, graphs, maps and text along with in
 Once you have finished experimenting with the cluster please don't just turn off the power, you risk corrupting your data and possibly the sd card. So follow the procedure of running the shutdown scripts on master01 and master02, then running the poweroff command on each of the pis before turning the power off.
 
 ## Wrapup
-I hope you have fun setting up and playing with the code, I learned a tonne of stuff setting it up and I hope you do too. If you have any improvements then please send pull requests to github, any problems and I'll respond to issues there too.
+I hope you have fun setting up and playing with the code, I learned a tonne of stuff configuring it and I hope you do too. If you have any improvements then please send pull requests to github, any problems and I'll respond to issues on there too.
