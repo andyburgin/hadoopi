@@ -15,16 +15,6 @@ execute "create prometheus symlink" do
         user "root"
 end
 
-execute "change prometheus file permissions" do
-        command "chown -R hduser:hadoop /opt/prometheus"
-        user "root"
-end
-
-execute "change prometheus file permissions" do
-        command "chown -R hduser:hadoop /opt/prometheus-#{node['prometheus']['version']}.linux-armv7"
-        user "root"
-end
-
 # no systemd_unit resource till chef 12.11, fall back to template and systemctl 
 template "/etc/systemd/system/prometheus.service" do
         source "prometheus.service.erb"
@@ -37,8 +27,4 @@ execute "enable and start prometheus" do
         command "systemctl daemon-reload && systemctl enable prometheus && systemctl start prometheus"
         user "root"
 end
-
-
-
-
 
