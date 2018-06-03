@@ -32,3 +32,7 @@ su hduser - -c "cd /opt/sqoop/ && /opt/sqoop/bin/sqoop.sh server start"
 
 echo "Start Process Exporter"
 /opt/process-exporter/process-exporter -config.path /opt/process-exporter/conf/config.yml > /opt/process-exporter/logs/process-exporter.out 2> /opt/process-exporter/logs/process-exporter.err &
+
+echo "Start mysqld exporter"
+export DATA_SOURCE_NAME='exporter:ersdfsdfsd@(localhost:3306)/' && /opt/mysqld_exporter/mysqld_exporter > /opt/mysqld_exporter/log/mysqld_exporter.out 2> /opt/mysqld_exporter/log/mysqld_exporter.err &
+

@@ -23,6 +23,10 @@ default['solr']['version'] = '4.10.4'
 default['prometheus']['version'] = '2.2.1'
 default['nodeexporter']['version'] = '0.15.2'
 default['processexporter']['version'] = '0.1.0'
+default['mysqlexporter']['version'] = '0.10.0'
+
+# if you change the below password remember to change it in the master01-startup.sh script too
+default['mysqlexporter']['password'] = 'ersdfsdfsd'
 
 #networking
 default['hosts'] =  {
