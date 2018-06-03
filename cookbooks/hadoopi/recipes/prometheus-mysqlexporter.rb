@@ -15,6 +15,10 @@ execute "create mysqlexporter symlink" do
         user "root"
 end
 
+directory '/opt/mysqld_exporter/log' do
+  action :create
+end
+
 execute "create mysql exporter user" do
         command "mysql -u root -e \"CREATE USER 'exporter'@'localhost' IDENTIFIED BY '#{node['mysqlexporter']['password']}';\""
         user "root"
