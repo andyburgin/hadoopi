@@ -15,3 +15,7 @@ execute "create process-exporter symlink" do
         user "root"
 end
 
+directory '/opt/process-exporter/logs' do
+  action :create
+end
+
