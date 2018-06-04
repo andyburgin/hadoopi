@@ -322,6 +322,7 @@ elif [ "$COMMAND" = "snapshotinfo" ] ; then
 elif [ "$COMMAND" = "master" ] ; then
   CLASS='org.apache.hadoop.hbase.master.HMaster'
   if [ "$1" != "stop" ] && [ "$1" != "clear" ] ; then
+    HBASE_OPTS="$HBASE_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=26010:/opt/jmxexporter/etc/prometheus_hbase_jmx_config.yaml"
     HBASE_OPTS="$HBASE_OPTS $HBASE_MASTER_OPTS"
   fi
 elif [ "$COMMAND" = "regionserver" ] ; then
@@ -331,6 +332,7 @@ elif [ "$COMMAND" = "regionserver" ] ; then
   fi
 elif [ "$COMMAND" = "thrift" ] ; then
   CLASS='org.apache.hadoop.hbase.thrift.ThriftServer'
+  HBASE_OPTS="$HBASE_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=29095:/opt/jmxexporter/etc/prometheus_hbase_jmx_config.yaml"
   if [ "$1" != "stop" ] ; then
     HBASE_OPTS="$HBASE_OPTS $HBASE_THRIFT_OPTS"
   fi

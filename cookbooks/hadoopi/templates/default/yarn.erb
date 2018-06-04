@@ -221,6 +221,7 @@ elif [ "$COMMAND" = "resourcemanager" ] ; then
   CLASSPATH=${CLASSPATH}:$YARN_CONF_DIR/rm-config/log4j.properties
   CLASS='org.apache.hadoop.yarn.server.resourcemanager.ResourceManager'
   YARN_OPTS="$YARN_OPTS $YARN_RESOURCEMANAGER_OPTS"
+  YARN_OPTS="$YARN_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=28050:/opt/jmxexporter/etc/prometheus_yarn_resourcemanager_jmx_exporter.yaml"
   if [ "$YARN_RESOURCEMANAGER_HEAPSIZE" != "" ]; then
     JAVA_HEAP_MAX="-Xmx""$YARN_RESOURCEMANAGER_HEAPSIZE""m"
   fi
@@ -244,6 +245,7 @@ elif [ "$COMMAND" = "nodemanager" ] ; then
   CLASSPATH=${CLASSPATH}:$YARN_CONF_DIR/nm-config/log4j.properties
   CLASS='org.apache.hadoop.yarn.server.nodemanager.NodeManager'
   YARN_OPTS="$YARN_OPTS -server $YARN_NODEMANAGER_OPTS"
+  YARN_OPTS="$YARN_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=28040:/opt/jmxexporter/etc/prometheus_yarn_nodemanager_jmx_exporter.yaml"
   if [ "$YARN_NODEMANAGER_HEAPSIZE" != "" ]; then
     JAVA_HEAP_MAX="-Xmx""$YARN_NODEMANAGER_HEAPSIZE""m"
   fi

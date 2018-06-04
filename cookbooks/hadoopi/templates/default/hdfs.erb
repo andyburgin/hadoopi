@@ -130,15 +130,18 @@ fi
 
 if [ "$COMMAND" = "namenode" ] ; then
   CLASS='org.apache.hadoop.hdfs.server.namenode.NameNode'
+  HADOOP_NAMENODE_OPTS="$HADOOP_NAMENODE_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=20070:/opt/jmxexporter/etc/prometheus_hdfs_namenode_jmx_exporter.yaml"
   HADOOP_OPTS="$HADOOP_OPTS $HADOOP_NAMENODE_OPTS"
 elif [ "$COMMAND" = "zkfc" ] ; then
   CLASS='org.apache.hadoop.hdfs.tools.DFSZKFailoverController'
   HADOOP_OPTS="$HADOOP_OPTS $HADOOP_ZKFC_OPTS"
 elif [ "$COMMAND" = "secondarynamenode" ] ; then
   CLASS='org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode'
+  HADOOP_SECONDARYNAMENODE_OPTS="$HADOOP_SECONDARYNAMENODE_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=20090:/opt/jmxexporter/etc/prometheus_hdfs_secondarynamenode_jmx_exporter.yaml"
   HADOOP_OPTS="$HADOOP_OPTS $HADOOP_SECONDARYNAMENODE_OPTS"
 elif [ "$COMMAND" = "datanode" ] ; then
   CLASS='org.apache.hadoop.hdfs.server.datanode.DataNode'
+  HADOOP_DATANODE_OPTS="$HADOOP_DATANODE_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=20075:/opt/jmxexporter/etc/prometheus_hdfs_datanode_jmx_exporter.yaml"
   if [ "$starting_secure_dn" = "true" ]; then
     HADOOP_OPTS="$HADOOP_OPTS -jvm server $HADOOP_DATANODE_OPTS"
   else

@@ -86,6 +86,7 @@ if [ "$HADOOP_MAPRED_PID_DIR" = "" ]; then
 fi
 
 HADOOP_OPTS="$HADOOP_OPTS -Dhadoop.id.str=$HADOOP_MAPRED_IDENT_STRING"
+HADOOP_OPTS="$HADOOP_OPTS -javaagent:/opt/jmxexporter/lib/jmx_prometheus_javaagent-<%= node['jmxexporter']['version'] %>.jar=29888:/opt/jmxexporter/etc/prometheus_mapreduce_history_jmx_exporter.yaml"
 
 log=$HADOOP_MAPRED_LOG_DIR/mapred-$HADOOP_MAPRED_IDENT_STRING-$command-$HOSTNAME.out
 pid=$HADOOP_MAPRED_PID_DIR/mapred-$HADOOP_MAPRED_IDENT_STRING-$command.pid

@@ -46,3 +46,38 @@ template "/opt/hbase/bin/hbase" do
         only_if { ::File.exist?('/opt/hbase') }
 end
 
+# jmx exporter templates
+template "/opt/jmxexporter/etc/prometheus_hbase_jmx_config.yaml" do
+        source "prometheus_hbase_jmx_config.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_hdfs_datanode_jmx_exporter.yaml" do
+        source "prometheus_hdfs_datanode_jmx_exporter.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_hdfs_namenode_jmx_exporter.yaml" do
+        source "prometheus_hdfs_namenode_jmx_exporter.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_hdfs_secondarynamenode_jmx_exporter.yaml" do
+        source "prometheus_hdfs_secondarynamenode_jmx_exporter.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_mapreduce_history_jmx_exporter.yaml" do
+        source "prometheus_mapreduce_history_jmx_exporter.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_yarn_nodemanager_jmx_exporter.yaml" do
+        source "prometheus_yarn_nodemanager_jmx_exporter.yaml.erb"
+        mode 0644
+end
+
+template "/opt/jmxexporter/etc/prometheus_yarn_resourcemanager_jmx_exporter.yaml" do
+        source "prometheus_yarn_resourcemanager_jmx_exporter.yaml.erb"
+        mode 0644
+end
