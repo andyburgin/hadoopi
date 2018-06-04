@@ -17,6 +17,9 @@ template "/opt/hadoop/etc/hadoop/hadoop-env.sh" do
         mode 0644
         user 'hduser'
         group 'hadoop'
+        variables(
+             :maxmem => node['hadoop']['maxmem']
+        )
 end
 
 template "/opt/hadoop/sbin/mr-jobhistory-daemon.sh" do
