@@ -3,7 +3,8 @@
 		"recipe[hadoopi::network]",
 		"recipe[hadoopi::user]",
 		"recipe[hadoopi::hadoop-install]",
-                "recipe[hadoopi::prometheus-nodeexporter]"
+                "recipe[hadoopi::prometheus-nodeexporter]",
+                "recipe[hadoopi::hadoop-prometheus-jmx]"
 	],
 
 	"node": {
