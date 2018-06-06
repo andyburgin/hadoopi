@@ -81,3 +81,11 @@ template "/opt/jmxexporter/etc/prometheus_yarn_resourcemanager_jmx_exporter.yaml
         source "prometheus_yarn_resourcemanager_jmx_exporter.yaml.erb"
         mode 0644
 end
+
+template "/opt/prometheus/prometheus.yml" do
+        source "prometheus.yml.jmx.erb"
+        mode 0644
+        user 'root'
+        group 'root'
+end
+
