@@ -10,7 +10,6 @@ This has now been changed and uses wired networking to add improvements for spee
 
 ![Cluster with wired network](doc/images/cluster-wired-network.jpg)
 
-
 The versions of installed Hadoop components are:
 
 * hadoop 2.6.4
@@ -24,6 +23,8 @@ The versions of installed Hadoop components are:
 * sqoop 1.99.4
 * solr 4.10.4
 * impala - not supported
+
+Metrics collection and visualisation has been added with the addition of Prometheus and Grafana
 
 ## Inspiration
 Running Hadoop on Rasberry Pis is not a new idea, a lot of work has been done by individuals and I wanted to make sure their efforts were recognised. Their work has formed the basis of my attempts and inspired me to start the project.
@@ -500,6 +501,76 @@ Select "Search" from the menu and then each of the dashboards in turn (Twitter, 
 ![Web Logs Dashboard](doc/images/solr-weblogs.jpg)
 
 You'll see each present a variety of charts, graphs, maps and text along with interactive filtering features to explore the data held in the solr search indexes.
+
+## Visualisation and Metrics 
+
+### Visualisation
+
+![Grafana HDFS](doc/images/grafana-hdfs.jpg)
+
+![Grafana Node](doc/images/grafana-nodes.jpg)
+
+Grafana can be accessed via http://master02:3000 (default login admin/admin) where the following dashboards can be viewed:
+
+* **Hadoop** - Adapted from Wikimedia Dashboard https://grafana.wikimedia.org/dashboard/db/analytics-hadoop?orgId=1
+
+* **HBase** - Adapted from Bas Harenslak post https://blog.godatadriven.com/hbase-prometheus-monitoring
+
+* **JVM** - Grafana Dashboard - https://grafana.com/dashboards/3066
+
+* **MySQL** - Adapted from Wikimedia dasjboard - https://grafana.wikimedia.org/dashboard/db/mysql?orgId=1
+
+* **Named Processes** - Grafana Dashboard - https://grafana.com/dashboards/249
+
+* **Node Exporter Full** - Grafana Dashboard - https://grafana.com/dashboards/1860
+
+* **Node Exporter Server Metrics** - Grafana Dashboard - https://grafana.com/dashboards/405
+
+* **Zookeeper** - Adapted from Wikimedia dashboard - https://grafana.wikimedia.org/dashboard/db/zookeeper-old-graphite?refresh=5m&orgId=1
+
+### Metrics
+
+Grafana Dashboards are built using prometheus metrics collected by a number of exporters:
+
+**Node exporter** - provides metrics about the state of each node
+
+**MySQL exporter** - provides metrics for the mysql server
+
+**JMX exporter** - exposes selected jmx metrics defined in:
+
+* prometheus_hbase_jmx_config.yaml
+* prometheus_hdfs_datanode_jmx_exporter.yaml
+* prometheus_hdfs_namenode_jmx_exporter.yaml
+* prometheus_hdfs_secondarynamenode_jmx_exporter.yaml
+* prometheus_mapreduce_history_jmx_exporter.yaml
+* prometheus_yarn_nodemanager_jmx_exporter.yaml
+* prometheus_yarn_resourcemanager_jmx_exporter.yaml
+
+Working out what metrics raw jmx can expose is shown in this example:
+* https://github.com/devopsjedi/hadoop-docker-jmx_exporter/blob/master/hadoop-env.sh
+You can then use visualvm to attach to the demon and decide which metrics you need to expose in your jmx exporter yaml config file.
+
+For details on how the jmx exporter works with Hadoop see these examples from Wikimedia: 
+* Add jmx exporter to Wikimedia Hadoop (excluding Hive and Oozie) https://phabricator.wikimedia.org/T177458
+* https://github.com/wikimedia/puppet/tree/production/modules/profile/files/hadoop
+* https://gerrit.wikimedia.org/r/#/c/operations/puppet/+/403123/
+Not forgetting the jmx exporter documentation https://github.com/prometheus/jmx_exporter
+
+**Process exporter** - some components don't expose metrics via jmx so we need to use the process exporter to grab values from /proc
+
+* livy
+* solr
+* huesupervisor
+* hueserver
+* sqoop
+* oozie
+* hiverserver2
+
+There are a couple of dcouments that detail how to add additional for spark which may be added at aa futur date 
+* http://rokroskar.github.io/monitoring-spark-on-hadoop-with-prometheus-and-grafana.html
+* https://argus-sec.com/monitoring-spark-prometheus/
+
+You can access the prometheus metrics by visiting http://master02:9091/graph and viweing which targets it collects from http://master02:9091/targets please review the docs at https://prometheus.io for more details about adding the collection of additional metrics or adding in alerting.
 
 ## Reminder, Power Off the Cluster
 Once you have finished experimenting with the cluster please don't just turn off the power, you risk corrupting your data and possibly the sd card. So follow the procedure of running the shutdown scripts on master01 and master02, then running the poweroff command on each of the pis before turning the power off.
