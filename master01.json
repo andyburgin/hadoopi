@@ -10,6 +10,7 @@
                 "recipe[hadoopi::hadoop-sqoop]",
                 "recipe[hadoopi::hadoop-solr-hdfs]",
                 "recipe[hadoopi::hadoop-spark-hdfs]",
+                "recipe[hadoopi::hadoop-prometheus-jmx]",
                 "recipe[hadoopi::prometheus-processexporter]",
                 "recipe[hadoopi::prometheus-mysqlexporter]",
                 "recipe[hadoopi::prometheus-nodeexporter]"

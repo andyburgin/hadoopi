@@ -82,10 +82,12 @@ template "/opt/jmxexporter/etc/prometheus_yarn_resourcemanager_jmx_exporter.yaml
         mode 0644
 end
 
+# update prometheus.yml if prometheus server installed on this node 
 template "/opt/prometheus/prometheus.yml" do
         source "prometheus.yml.jmx.erb"
         mode 0644
         user 'root'
         group 'root'
+        only_if { ::File.exist?('/opt/prometheus/prometheus.yml') }
 end
 
