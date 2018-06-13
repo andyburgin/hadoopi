@@ -39,11 +39,6 @@ template "/opt/spark/conf/spark-defaults.conf" do
         group 'hadoop'
 end
 
-
-
-
-
-
 # copy spark lib files to hdfs
 execute "start hdfs for copying of spark libs" do
         command "/opt/hadoop/sbin/start-dfs.sh"
