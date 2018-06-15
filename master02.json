@@ -6,6 +6,7 @@
 		"recipe[hadoopi::hadoop-install]",
 		"recipe[hadoopi::hadoop-hbase]",
 		"recipe[hadoopi::hadoop-spark]",
+		"recipe[hadoopi::hadoop-livy]",
 		"recipe[hadoopi::hadoop-solr]"
 	],
 

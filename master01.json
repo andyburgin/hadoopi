@@ -8,6 +8,7 @@
                 "recipe[hadoopi::hadoop-pig]",
                 "recipe[hadoopi::hadoop-oozie]",
                 "recipe[hadoopi::hadoop-sqoop]",
+                "recipe[hadoopi::hadoop-spark]",
                 "recipe[hadoopi::hadoop-solr-hdfs]",
                 "recipe[hadoopi::hadoop-spark-hdfs]"
 	],
