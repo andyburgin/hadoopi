@@ -1,20 +1,3 @@
-# unpack spark and copy libs to hdfs
-
-remote_file "/opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz" do
-    source "https://archive.apache.org/dist/spark/spark-#{node['spark']['version']}/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz"
-    action :create_if_missing
-end
-
-execute "unpack spark" do
-        command "tar -zxvf /opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}.tgz -C /opt/"
-        user "root"
-end
-
-execute "change spark file permissions" do
-        command "chown -R hduser:hadoop /opt/spark-#{node['spark']['version']}-bin-hadoop#{node['spark']['hadoop-version']}"
-        user "root"
-end
-
 # copy spark lib files to hdfs
 execute "start hdfs for copying of spark libs" do
         command "/opt/hadoop/sbin/start-dfs.sh"
