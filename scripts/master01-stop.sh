@@ -30,3 +30,8 @@ su oozie - -c "cd /opt/oozie && bin/oozied.sh stop"
 echo "Stop Sqoop"
 su hduser - -c "/opt/sqoop/bin/sqoop.sh server stop"
 
+echo "Stop Process Exporter"
+kill $(ps -ef | grep process-exporter | awk '{print $2}')
+
+echo "Stop mysqld exporter"
+kill $(ps -ef | grep mysqld_exporter | awk '{print $2}')

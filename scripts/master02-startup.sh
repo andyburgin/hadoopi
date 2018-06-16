@@ -12,3 +12,5 @@ su hduser - -c "export CLASSPATH=`hadoop classpath`; export SPARK_CONF_DIR=/opt/
 echo "Start Solr"
 su hduser - -c "/opt/solr/bin/solr start -m 256m -c -z master02:2181/solr -a '-Dsolr.hdfs.home=hdfs://master01:54310/solr'"
 
+echo "Start Process Exporter"
+/opt/process-exporter/process-exporter -config.path /opt/process-exporter/conf/config.yml > /opt/process-exporter/logs/process-exporter.out 2> /opt/process-exporter/logs/process-exporter.err &

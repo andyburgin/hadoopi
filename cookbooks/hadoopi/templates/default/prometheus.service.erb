@@ -1,0 +1,12 @@
+[Unit]
+Description=Promethus
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/prometheus/
+ExecStart=/opt/prometheus/prometheus --config.file prometheus.yml --web.listen-address ':9091'
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

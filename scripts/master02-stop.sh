@@ -11,3 +11,6 @@ su hduser - -c "kill $(ps -ef | grep livy | awk '{print $2}')"
 
 echo "Stop Solr"
 su hduser - -c "/opt/solr/bin/solr stop -all"
+
+echo "Stop Process Exporter"
+kill $(ps -ef | grep process-exporter | awk '{print $2}')

@@ -7,7 +7,12 @@
 		"recipe[hadoopi::hadoop-hbase]",
 		"recipe[hadoopi::hadoop-spark]",
 		"recipe[hadoopi::hadoop-livy]",
-		"recipe[hadoopi::hadoop-solr]"
+		"recipe[hadoopi::hadoop-solr]",
+                "recipe[hadoopi::prometheus-server]",
+                "recipe[hadoopi::hadoop-prometheus-jmx]",
+                "recipe[hadoopi::prometheus-processexporter]",
+                "recipe[hadoopi::prometheus-nodeexporter]",
+                "recipe[hadoopi::grafana]"
 	],
 
 	"node": {

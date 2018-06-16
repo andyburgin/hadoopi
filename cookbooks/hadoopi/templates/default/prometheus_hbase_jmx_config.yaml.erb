@@ -1,0 +1,14 @@
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+rules:
+  - pattern: Hadoop<service=HBase, name=RegionServer, sub=Regions><>Namespace_([^\W_]+)_table_([^\W_]+)_region_([^\W_]+)_metric_(\w+)
+    name: hbase_$4
+    labels:
+      namespace: "$1"
+      table: "$2"
+      region: "$3"
+  - pattern: Hadoop<service=HBase, name=(\w+), sub=(\w+)><>([\w.-]+)
+    name: hbase_$1_$2_$3
+  - pattern: org.apache.ZooKeeperService<name0=.*><>(\w+)
+    name: org_apache_ZooKeeperService_$1
+
