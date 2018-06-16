@@ -566,7 +566,7 @@ Not forgetting the jmx exporter documentation https://github.com/prometheus/jmx_
 * oozie
 * hiverserver2
 
-There are a couple of dcouments that detail how to add additional for spark which may be added at aa futur date 
+There are a couple of documents that detail how to add additional metrics for spark which may be added at a future date 
 * http://rokroskar.github.io/monitoring-spark-on-hadoop-with-prometheus-and-grafana.html
 * https://argus-sec.com/monitoring-spark-prometheus/
 
